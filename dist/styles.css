@@ -216,6 +216,12 @@ dd { margin: 0; }
 .answer { margin: .8rem 0; padding: .8rem 1rem; border-left: 3px solid var(--orange); background: #fff5ed; }
 .answer span { color: var(--orange-dark); font-size: .75rem; font-weight: 850; text-transform: uppercase; }
 .answer p { margin: .25rem 0 0; }
+.thread { padding: 1rem 0; border-bottom: 1px solid var(--line); }
+.thread:last-child { border-bottom: 0; }
+.thread-replies { margin: .7rem 0 0 1rem; padding-left: 1rem; border-left: 2px solid var(--line); }
+.thread-reply { padding: .55rem 0; }
+.thread-reply p { margin: .2rem 0 0; }
+.thread-create { margin-bottom: 1.2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--line); }
 .questions form { margin-top: 1rem; }
 .questions form .button { margin-top: .65rem; }
 .callout { display: flex; align-items: flex-start; gap: .9rem; padding: 1rem 1.1rem; margin: 0 0 1.4rem; border-radius: 12px; border: 1px solid; }
