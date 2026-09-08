@@ -8,6 +8,33 @@ Abre `index.html` directamente en un navegador moderno. También puedes servir e
 
 El selector gris **Modo prototipo**, separado de la cabecera de MiEnvio.es, cambia de actor y carga situaciones representativas. **Reiniciar datos** restaura anuncios, presupuestos, altas y comisiones al estado inicial. Los cambios se conservan en `localStorage` del navegador hasta reiniciarlos.
 
+## Desarrollo y publicación
+
+El proyecto usa HTML, CSS y JavaScript nativos, sin dependencias ni paso de compilación. Los archivos fuente son `index.html`, `styles.css` y `app.js`.
+
+Para ejecutarlo con Python 3:
+
+```sh
+python3 -m http.server 8000 --bind 127.0.0.1
+```
+
+Abre `http://127.0.0.1:8000`. Para preparar exclusivamente los archivos públicos:
+
+```sh
+sh scripts/build.sh
+python3 -m http.server 8000 --bind 127.0.0.1 --directory _site
+```
+
+`_site/` es una salida generada y no se versiona. El antiguo `dist/` y `.openai/` son archivos locales de la publicación anterior en Sites, no necesarios para GitHub Pages.
+
+### GitHub Pages
+
+En el repositorio de GitHub, configura **Settings → Pages → Build and deployment → Source → GitHub Actions**. El workflow `.github/workflows/pages.yml` publica cada push a `main` y también permite ejecutarlo manualmente desde Actions. Comprueba la sintaxis JavaScript y sube solamente los tres archivos públicos y `.nojekyll`; no requiere secretos propios ni servicios externos.
+
+La dirección de un repositorio de proyecto es `https://USUARIO.github.io/REPOSITORIO/`. CSS y JavaScript usan rutas relativas compatibles con esa subcarpeta. Las pantallas se cambian internamente sin modificar la URL; al recargar, el prototipo restaura el estado guardado en el navegador. No necesita reglas de reescritura, rutas de servidor ni una página 404 especial. Las pantallas individuales no tienen enlaces directos.
+
+No introduzcas datos reales en este prototipo. Los datos introducidos se guardan en el navegador, no en GitHub. `.gitignore` excluye configuraciones locales, credenciales, dependencias y archivos generados; revisa siempre los cambios antes de publicarlos.
+
 ## Recorridos de demostración
 
 ### Cliente
@@ -42,45 +69,3 @@ El selector gris **Modo prototipo**, separado de la cabecera de MiEnvio.es, camb
 1. Selecciona **Administrador**.
 2. En **Altas de transportistas**, aprueba una solicitud o recházala indicando un motivo obligatorio. El prototipo refleja el resultado en la plataforma y simula el aviso por correo.
 3. En **Configurar comisiones**, modifica límites o porcentajes. El último tramo permanece sin límite y las comisiones ya generadas no se recalculan.
-
-## Correspondencia con los 15 flujos
-
-| Flujo | Pantallas e interacción |
-| --- | --- |
-| F01 · Registro e inicio de cliente | **Crear una cuenta** o **Iniciar sesión** desde la pestaña de clientes → correo o Google simulado → completar nombre, teléfono y correo solo cuando falta algún dato → panel de cliente. |
-| F02 · Alta de transportista | Crear cuenta → datos básicos → datos profesionales y documentación ficticia → **Enviar solicitud de alta** → Pendiente/Rechazada/Aprobada, subsanación y revisión administrativa. Completar datos profesionales no envía la solicitud. |
-| F03 · Inicio de transportista | **Iniciar sesión** identifica alta no iniciada/incompleta, pendiente, rechazada o aprobada y muestra la pantalla y permisos correspondientes; iniciar sesión no cambia el estado. |
-| F04 · Editar perfil | **Mi perfil**, con nombre, correo, teléfono y biografía; validación de datos de contacto en la biografía. |
-| F05 · Publicar anuncio | **Publicar anuncio**, con categoría única, uno o dos elementos, peso, medidas, códigos postales, fechas específicas/flexibles y notas. |
-| F06 · Buscar y guardar búsquedas | **Buscar anuncios**, filtros, estado vacío, guardado y reutilización de criterios. |
-| F07 · Detalle del anuncio | Resultado → **Ver detalle**, con mercancía, preguntas y todos los presupuestos identificados por ID; contactos ocultos antes de aceptar. |
-| F08 · Preguntas y respuestas | Sección pública del detalle; pregunta del transportista aprobado y respuesta del cliente propietario. |
-| F09 · Eliminar anuncio | Anuncio propio Activo o Inactivo → confirmación → anuncio Eliminado y propuestas activas Inactivas. |
-| F10 · Enviar presupuesto | Detalle activo → precio, fecha de trabajo opcional, vencimiento opcional y condiciones; admite varias propuestas del mismo transportista. |
-| F11 · Aceptar presupuesto | Detalle del cliente → confirmación con todos los efectos → estados coherentes, contacto bilateral y comisión única. |
-| F12 · Rechazar presupuesto | Detalle del cliente → motivo obligatorio; solo cambia la propuesta elegida. |
-| F13 · Presupuestos enviados | **Mis presupuestos**, con estados, vencimiento y comisión cuando corresponde. |
-| F14 · Configurar comisiones | Administración → **Configurar comisiones**, tramos editables, último tramo sin límite y aviso de no retroactividad. |
-| F15 · Comisiones del mes | **Comisiones**, resumen y desglose por fecha de aceptación, sin pagos ni conciliación. |
-
-## Suposiciones del prototipo pendientes de validar
-
-- **Fechas flexibles:** se representan como un intervalo. Una búsqueda por fecha incluye el anuncio cuando la fecha cae dentro de ese intervalo. El PRD deja pendiente la regla definitiva.
-- **Documentación española:** los nombres de documentos son ejemplos de interfaz; el prototipo no fija la lista válida ni almacena archivos.
-- **Tramos iniciales:** se cargan los porcentajes ilustrativos del PRD y un último tramo abierto. No son tarifas comerciales definitivas.
-- **Zona horaria:** la simulación usa el 7 de septiembre de 2026 como “hoy” y septiembre de 2026 como mes de consulta. La zona horaria de negocio sigue pendiente.
-- **Visibilidad histórica:** el cliente ve sus anuncios Activos, Aceptados e Inactivos; la búsqueda del transportista muestra los Activos. La política histórica definitiva sigue pendiente.
-- **Consulta sin sesión:** la pestaña pública de transportistas permite explorar los datos ficticios del listado y detalle, pero exige sesión aprobada para preguntar o presupuestar. El PRD no define todavía el acceso anónimo real.
-- **Cobertura:** se aceptan códigos postales españoles de cinco dígitos, sin restringir todavía provincias o islas dentro de España.
-
-No se detectó ninguna contradicción entre `prompt-mockup.md` y las reglas de negocio del PRD. Las decisiones abiertas anteriores se mantienen como supuestos de representación y no como reglas definitivas.
-
-## Verificaciones realizadas
-
-- Revisión completa del PRD y de la referencia visual de cabecera.
-- Comprobación sintáctica del JavaScript.
-- Revisión de las transiciones de aceptación, rechazo y eliminación y del cálculo no progresivo de comisión.
-- Revisión estática de controles, etiquetas, foco visible, mensajes de error y estructura responsive para escritorio, tableta y móvil.
-- Comprobación manual del arranque directo mediante `file://` realizada durante la construcción.
-
-La automatización visual integrada del navegador no estuvo disponible en el entorno de construcción. La revisión final en tamaños reales debe completarse durante la sesión de validación con producto.

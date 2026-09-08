@@ -1,0 +1,28 @@
+# Generated static output
+/dist/
+/_site/
+
+# Local hosting and editor configuration
+/.openai/
+/.codex/
+/.agents/
+/.vscode/
+/.idea/
+.DS_Store
+
+# Credentials and local environment
+.env
+.env.*
+*.pem
+*.key
+*.p12
+*.pfx
+
+# Dependencies, logs and temporary artifacts
+node_modules/
+__pycache__/
+*.pyc
+*.log
+*.tmp
+*.zip
+*.tar.gz
