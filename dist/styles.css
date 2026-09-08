@@ -218,6 +218,13 @@ dd { margin: 0; }
 .answer p { margin: .25rem 0 0; }
 .thread { padding: 1rem 0; border-bottom: 1px solid var(--line); }
 .thread:last-child { border-bottom: 0; }
+.thread summary { display: grid; grid-template-columns: 1fr auto; gap: .25rem .8rem; cursor: pointer; list-style: none; }
+.thread summary::-webkit-details-marker { display: none; }
+.thread summary::before { content: "＋"; color: var(--orange); font-weight: 800; grid-row: span 2; }
+.thread[open] summary::before { content: "−"; }
+.thread summary strong { grid-column: 2; }
+.thread-count { grid-column: 2; color: var(--muted); font-size: .75rem; }
+.thread-body { padding-left: 1.5rem; }
 .thread-replies { margin: .7rem 0 0 1rem; padding-left: 1rem; border-left: 2px solid var(--line); }
 .thread-reply { padding: .55rem 0; }
 .thread-reply p { margin: .2rem 0 0; }
