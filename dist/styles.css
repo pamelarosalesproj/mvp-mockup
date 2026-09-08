@@ -117,6 +117,7 @@ h1 { max-width: 700px; margin: 0; color: var(--navy); font-family: Georgia, "Tim
 .segmented button { border: 0; background: transparent; color: var(--muted); border-radius: 6px; padding: .4rem .7rem; font-size: .8125rem; font-weight: 800; }
 .segmented button.is-active { color: var(--navy); background: #eaf0f3; }
 .card-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+.card-grid:has(.result-card) { grid-template-columns: 1fr; }
 .ad-card { display: flex; flex-direction: column; background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 1.4rem; }
 .ad-card-head, .result-head, .review-head, .quote-main { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; }
 .ad-card h2, .result-card h2, .review-card h2 { margin: .3rem 0 0; color: var(--navy); font-size: 1.2rem; }
