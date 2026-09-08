@@ -160,7 +160,7 @@ label:has(.required-mark) > input,
 label:has(.required-mark) > select,
 label:has(.required-mark) > textarea { display: block; margin-top: .4rem; }
 .form-panel[data-form="publish"] label:has(> :required) { display: block; }
-.form-panel[data-form="publish"] label:has(> :required)::before { content: "*"; color: var(--orange); font-weight: 800; margin-right: .2rem; }
+.form-panel[data-form="publish"] label:has(> :required):not(:has(.required-mark))::before { content: "*"; color: var(--orange); font-weight: 800; float: right; }
 .form-panel[data-form="publish"] label:has(> :required) > input,
 .form-panel[data-form="publish"] label:has(> :required) > select,
 .form-panel[data-form="publish"] label:has(> :required) > textarea { display: block; margin-top: .4rem; }
