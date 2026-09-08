@@ -164,7 +164,7 @@
   }
   function articleBlock(index = 1) {
     const suffix = index === 1 ? '' : index;
-    return `<div class="article-block" data-article-index="${index}"><div class="form-grid"><label>Artículo<input name="item${suffix}" placeholder="Ej. Sillas" required></label><label>Cantidad<input name="quantity${suffix}" type="number" min="1" value="1" required></label><label>Peso aproximado (kg)<input name="weight${suffix}" type="number" min="1" required></label><div class="dimension-group span-2"><span>Medidas aproximadas (cm)</span><div><label>Largo<input name="length${suffix}" type="number" min="1" required></label><label>Ancho<input name="width${suffix}" type="number" min="1" required></label><label>Alto<input name="height${suffix}" type="number" min="1" required></label></div></div></div></div>`;
+    return `<div class="article-block" data-article-index="${index}"><div class="form-grid"><label>Artículo <span class="required-mark">*</span><input name="item${suffix}" placeholder="Ej. Sillas" required></label><label>Cantidad <span class="required-mark">*</span><input name="quantity${suffix}" type="number" min="1" value="1" required></label><label>Peso aproximado (kg) <span class="required-mark">*</span><input name="weight${suffix}" type="number" min="1" required></label><div class="dimension-group span-2"><span>Medidas aproximadas (cm)</span><div><label>Largo <span class="required-mark">*</span><input name="length${suffix}" type="number" min="1" required></label><label>Ancho <span class="required-mark">*</span><input name="width${suffix}" type="number" min="1" required></label><label>Alto <span class="required-mark">*</span><input name="height${suffix}" type="number" min="1" required></label></div></div></div></div>`;
   }
   function renderCarrierProfile() {
     const user = currentUser();
@@ -190,6 +190,7 @@
       const dateToggle = $('[name="specificDates"]'); const dateFields = $('[data-date-fields]');
       const syncDates = () => { dateFields.hidden = !dateToggle.checked; dateFields.querySelectorAll('input[type="date"]').forEach((input) => { input.required = dateToggle.checked; }); };
       dateToggle.addEventListener('change', syncDates); syncDates();
+      $$('.form-panel[data-form="publish"] label').forEach((label) => { if (label.querySelector(':required') && !label.querySelector('.required-mark')) { const textNode = [...label.childNodes].find((node) => node.nodeType === 3 && node.textContent.trim()); if (textNode) textNode.textContent = `${textNode.textContent.trimEnd()} *`; } });
     }
     if (data.route === 'carrier-onboarding' && currentUser()?.role !== 'carrier') {
       const form = $('[data-form="onboarding"]');

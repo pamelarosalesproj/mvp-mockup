@@ -190,6 +190,7 @@
       const dateToggle = $('[name="specificDates"]'); const dateFields = $('[data-date-fields]');
       const syncDates = () => { dateFields.hidden = !dateToggle.checked; dateFields.querySelectorAll('input[type="date"]').forEach((input) => { input.required = dateToggle.checked; }); };
       dateToggle.addEventListener('change', syncDates); syncDates();
+      $$('.form-panel[data-form="publish"] label').forEach((label) => { if (label.querySelector(':required') && !label.querySelector('.required-mark')) { const textNode = [...label.childNodes].find((node) => node.nodeType === 3 && node.textContent.trim()); if (textNode) textNode.textContent = `${textNode.textContent.trimEnd()} *`; } });
     }
     if (data.route === 'carrier-onboarding' && currentUser()?.role !== 'carrier') {
       const form = $('[data-form="onboarding"]');
