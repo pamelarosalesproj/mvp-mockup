@@ -190,7 +190,7 @@
       const demoDocs = ['Acreditación profesional ficticia revisada', 'Documentación ficticia de la furgoneta revisada'];
       $$('input[type="file"]').forEach((input, index) => { const label = input.closest('label'); label.classList.add('choice'); label.innerHTML = `<input type="checkbox" name="${input.name}" required> ${demoDocs[index]}<span class="field-help">No selecciones ni adjuntes archivos reales.</span>`; });
     }
-    if (data.route === 'carrier-onboarding' && !data.session) {
+    if (data.route === 'carrier-onboarding' && currentUser()?.role !== 'carrier') {
       const form = $('[data-form="onboarding"]');
       if (form) form.replaceWith('<section class="panel onboarding-gate"><h2>Crea tu cuenta para empezar</h2><p>Primero registra tu correo, nombre y teléfono. Después podrás completar los datos profesionales y enviar la solicitud de alta.</p><button class="button button-primary" type="button" data-action="create-account">Crear una cuenta</button></section>');
     }
