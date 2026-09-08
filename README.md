@@ -18,7 +18,7 @@ El selector gris **Modo prototipo**, separado de la cabecera de MiEnvio.es, camb
 4. Acepta otro: el anuncio y la propuesta elegida pasan a Aceptado; las demás propuestas activas pasan a Inactivo; las rechazadas y caducadas conservan su estado; aparece el contacto del transportista seleccionado y se crea una comisión.
 5. Vuelve a **Mis anuncios** y abre **12 cajas de libros** para comprobar el estado sin presupuestos.
 6. Usa **Publicar anuncio** para recorrer las validaciones, añadir un segundo elemento de la misma categoría y crear un anuncio Activo con cero presupuestos.
-7. Para probar el primer acceso, selecciona **Visitante · Cliente**, pulsa **Publicar anuncio** y continúa con correo o con Google simulado. Nombre y teléfono son obligatorios en ambos métodos.
+7. Para probar F01 selecciona **Visitante · Cliente**, pulsa **Crear una cuenta** desde la cabecera o entra en **Iniciar sesión** y usa el enlace de creación. Continúa con correo o con Google simulado. Nombre y teléfono son obligatorios en ambos métodos; una cuenta ya creada puede iniciar sesión directamente en el panel. El escenario **Cliente · Registro incompleto** simula una cuenta existente a la que le falta un dato obligatorio.
 
 ### Transportista aprobado
 
@@ -32,8 +32,10 @@ El selector gris **Modo prototipo**, separado de la cabecera de MiEnvio.es, camb
 
 ### Transportista pendiente o rechazado
 
-1. Selecciona **Transportista · Alta pendiente**. Puede buscar, abrir anuncios y leer presupuestos, pero los controles de preguntas y propuestas están deshabilitados.
-2. Selecciona **Transportista · Alta rechazada**. Se muestra el motivo y un formulario de subsanación; al enviarlo, la solicitud vuelve a Pendiente.
+1. Selecciona **Transportista · Alta no iniciada**. F03 dirige a **Completar alta**; completar los datos profesionales y marcar la documentación ficticia todavía no envía la solicitud.
+2. Pulsa **Enviar solicitud de alta**. F02 registra el estado Pendiente y muestra el estado de revisión.
+3. Selecciona **Transportista · Alta pendiente**. Puede buscar, abrir anuncios y leer presupuestos, pero los controles de preguntas y propuestas están deshabilitados.
+4. Selecciona **Transportista · Alta rechazada**. Se muestra el motivo y un formulario de subsanación; al enviarlo, la solicitud vuelve a Pendiente.
 
 ### Administrador
 
@@ -45,9 +47,9 @@ El selector gris **Modo prototipo**, separado de la cabecera de MiEnvio.es, camb
 
 | Flujo | Pantallas e interacción |
 | --- | --- |
-| F01 · Registro e inicio de cliente | Portada de clientes → acceso por correo o Google simulado → completar nombre, teléfono y correo → panel de cliente. |
-| F02 · Alta de transportista | Primer acceso de transportista, presentación simulada de documentación, estados Pendiente/Rechazada/Aprobada, subsanación y revisión administrativa. |
-| F03 · Inicio de transportista | Selector de escenarios aprobado, pendiente o rechazado; la sesión aplica los permisos de cada estado sin modificarlo. |
+| F01 · Registro e inicio de cliente | **Crear una cuenta** o **Iniciar sesión** desde la pestaña de clientes → correo o Google simulado → completar nombre, teléfono y correo solo cuando falta algún dato → panel de cliente. |
+| F02 · Alta de transportista | Crear cuenta → datos básicos → datos profesionales y documentación ficticia → **Enviar solicitud de alta** → Pendiente/Rechazada/Aprobada, subsanación y revisión administrativa. Completar datos profesionales no envía la solicitud. |
+| F03 · Inicio de transportista | **Iniciar sesión** identifica alta no iniciada/incompleta, pendiente, rechazada o aprobada y muestra la pantalla y permisos correspondientes; iniciar sesión no cambia el estado. |
 | F04 · Editar perfil | **Mi perfil**, con nombre, correo, teléfono y biografía; validación de datos de contacto en la biografía. |
 | F05 · Publicar anuncio | **Publicar anuncio**, con categoría única, uno o dos elementos, peso, medidas, códigos postales, fechas específicas/flexibles y notas. |
 | F06 · Buscar y guardar búsquedas | **Buscar anuncios**, filtros, estado vacío, guardado y reutilización de criterios. |

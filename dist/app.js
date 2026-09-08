@@ -58,9 +58,9 @@
   function persist() { localStorage.setItem(STORAGE_KEY, JSON.stringify(data)); }
   function currentUser() {
     if (!data.session) return null;
-    if (data.session.role === 'client') return { role: 'client', id: 'C-1', name: 'Marta Ruiz', email: 'marta.ruiz@demo.es', phone: '612 345 780' };
+    if (data.session.role === 'client') return { role: 'client', id: 'C-1', name: 'Marta Ruiz', email: 'marta.ruiz@demo.es', phone: data.session.incomplete ? '' : '612 345 780' };
     if (data.session.role === 'admin') return { role: 'admin', id: 'ADMIN-1', name: 'Administración' };
-    const statuses = { 'carrier-approved': 'Aprobada', 'carrier-pending': 'Pendiente', 'carrier-rejected': 'Rechazada' };
+    const statuses = { 'carrier-approved': 'Aprobada', 'carrier-pending': 'Pendiente', 'carrier-rejected': 'Rechazada', 'carrier-incomplete': 'Incompleta' };
     return { role: 'carrier', id: data.session.carrierId || 'TR-204', name: data.session.name || 'Rutas Camino Sur', status: statuses[data.scenario] || data.session.status || 'Aprobada', email: data.profile.email, phone: data.profile.phone };
   }
   function isApproved() { const user = currentUser(); return user?.role === 'carrier' && user.status === 'Aprobada'; }
@@ -78,10 +78,11 @@
   function setScenario(scenario) {
     data.scenario = scenario;
     const config = {
-      'guest-client': { audience: 'client', session: null, route: 'home' }, client: { audience: 'client', session: { role: 'client' }, route: 'client-dashboard' },
+      'guest-client': { audience: 'client', session: null, route: 'home' }, client: { audience: 'client', session: { role: 'client' }, route: 'client-dashboard' }, 'client-incomplete': { audience: 'client', session: { role: 'client', incomplete: true }, route: 'complete-email' },
       'carrier-approved': { audience: 'carrier', session: { role: 'carrier', carrierId: 'TR-204', status: 'Aprobada', name: 'Rutas Camino Sur' }, route: 'search' },
       'carrier-pending': { audience: 'carrier', session: { role: 'carrier', carrierId: 'TR-301', status: 'Pendiente', name: 'Logística Tormes' }, route: 'search' },
       'carrier-rejected': { audience: 'carrier', session: { role: 'carrier', carrierId: 'TR-302', status: 'Rechazada', name: 'Álvaro Nieto' }, route: 'carrier-onboarding' },
+      'carrier-incomplete': { audience: 'carrier', session: { role: 'carrier', carrierId: 'TR-303', status: 'Incompleta', name: 'Nueva cuenta transportista' }, route: 'carrier-onboarding' },
       admin: { audience: 'client', session: { role: 'admin' }, route: 'admin-reviews' }
     }[scenario];
     Object.assign(data, config); persist(); render(); toast('Escenario de demostración cargado.');
@@ -94,7 +95,7 @@
     let nav = ''; let actions = '';
     if (!user) {
       nav = data.audience === 'carrier' ? navButtons([['search', 'Buscar anuncios'], ['carrier-onboarding', 'Cómo darse de alta']]) : navButtons([['home', 'Cómo funciona']]);
-      actions = `<button class="button button-ghost" type="button" data-action="login">Iniciar sesión</button><button class="button button-primary" type="button" data-action="primary">${data.audience === 'carrier' ? 'Buscar anuncios' : 'Publicar anuncio'}</button>`;
+      actions = `<button class="button button-ghost" type="button" data-action="login">Iniciar sesión</button><button class="button button-secondary header-create" type="button" data-action="create-account">Crear una cuenta</button><button class="button button-primary" type="button" data-action="primary">${data.audience === 'carrier' ? 'Buscar anuncios' : 'Publicar anuncio'}</button>`;
     } else if (user.role === 'client') {
       nav = navButtons([['client-dashboard', 'Mis anuncios'], ['publish', 'Publicar anuncio']]); actions = `<button class="account-chip" type="button" data-route="client-dashboard"><span>MR</span><span><small>Cliente</small>${user.name}</span></button>`;
     } else if (user.role === 'carrier') {
@@ -117,7 +118,7 @@
   }
   function renderLogin() {
     const role = data.audience === 'carrier' ? 'transportista' : 'cliente';
-    return viewShell(`<div class="auth-layout"><section class="auth-copy"><p class="eyebrow">Acceso simulado</p><h1>Entra como ${role}.</h1><p>Este prototipo no envía datos ni conecta con servicios externos.</p>${['Elige un método de acceso ficticio.','Completa los datos obligatorios en el primer acceso.','Continúa al panel correspondiente.'].map((text, i) => `<div class="mini-feature"><span>${i + 1}</span><p>${text}</p></div>`).join('')}</section><section class="panel auth-panel"><h2>Acceder o crear cuenta</h2><p class="muted">Como ${role}</p><button class="button button-google" type="button" data-action="google-login">G <span>Continuar con Google</span></button><div class="divider"><span>o con correo electrónico</span></div><form data-form="login"><label>Correo electrónico<input type="email" name="email" value="${role === 'cliente' ? 'marta.ruiz@demo.es' : 'hola@caminosur.demo'}" required></label><button class="button button-primary button-block" type="submit">Continuar</button></form><p class="form-note">No se enviará ningún correo. La autenticación es parte de la simulación.</p></section></div>`, 'auth-page');
+    return viewShell(`<div class="auth-layout"><section class="auth-copy"><p class="eyebrow">Acceso simulado</p><h1>Entra como ${role}.</h1><p>Este prototipo no envía datos ni conecta con servicios externos.</p>${['Elige un método de acceso ficticio.','Completa los datos obligatorios en el primer acceso.','Continúa al panel correspondiente.'].map((text, i) => `<div class="mini-feature"><span>${i + 1}</span><p>${text}</p></div>`).join('')}</section><section class="panel auth-panel"><h2>Iniciar sesión</h2><p class="muted">Como ${role}</p><button class="button button-google" type="button" data-action="google-login">G <span>Continuar con Google</span></button><div class="divider"><span>o con correo electrónico</span></div><form data-form="login"><label>Correo electrónico<input type="email" name="email" value="${role === 'cliente' ? 'marta.ruiz@demo.es' : 'hola@caminosur.demo'}" required></label><button class="button button-primary button-block" type="submit">Iniciar sesión</button></form><p class="create-account-line">¿No tienes cuenta? <button class="button-link" type="button" data-action="create-account">Crear una cuenta</button></p><p class="form-note">No se enviará ningún correo. La autenticación es parte de la simulación.</p></section></div>`, 'auth-page');
   }
   function renderCompleteRegistration(method) {
     const role = data.audience === 'carrier' ? 'transportista' : 'cliente';
@@ -166,7 +167,7 @@
     return viewShell(`${pageHeading('Cuenta de transportista · F04', 'Tu perfil.', 'Los datos privados solo se muestran al cliente cuyo presupuesto aceptes.')}<div class="profile-layout"><aside class="panel profile-status"><div class="avatar-large">RC</div><h2>${escapeHtml(data.profile.name)}</h2>${status(user.status)}<dl><div><dt>ID público</dt><dd>${user.id}</dd></div><div><dt>Tipo</dt><dd>Empresa</dd></div><div><dt>Furgonetas</dt><dd>2</dd></div></dl></aside><form class="panel form-panel" data-form="profile"><h2>Datos del perfil</h2><div class="form-grid"><label>Nombre o razón social<input name="name" value="${escapeHtml(data.profile.name)}" required></label><label>Correo electrónico<input name="email" type="email" value="${escapeHtml(data.profile.email)}" required></label><label>Teléfono<input name="phone" value="${escapeHtml(data.profile.phone)}" required></label><label class="span-2">Biografía<textarea name="bio" rows="5" required>${escapeHtml(data.profile.bio)}</textarea><span class="field-help">No incluyas teléfonos, correos ni enlaces de contacto.</span></label></div><div class="form-error" hidden></div><div class="form-actions"><button class="button button-primary" type="submit">Guardar cambios</button></div></form></div>`);
   }
   function renderCarrierOnboarding() {
-    const user = currentUser(); const review = data.carrierReviews.find((item) => item.carrierId === user?.id) || data.carrierReviews[1]; const rejected = user?.status === 'Rechazada'; const pending = user?.status === 'Pendiente'; const intro = pending ? callout('Solicitud en revisión', 'Te comunicaremos el resultado por correo electrónico y también aparecerá aquí. Mientras tanto puedes consultar anuncios.', 'info') : rejected ? callout('Solicitud rechazada', review.reason, 'warning') : '';
+    const user = currentUser(); const review = data.carrierReviews.find((item) => item.carrierId === user?.id) || data.carrierReviews[1]; const rejected = user?.status === 'Rechazada'; const pending = user?.status === 'Pendiente'; const incomplete = user?.status === 'Incompleta'; const intro = pending ? callout('Solicitud en revisión', 'Te comunicaremos el resultado por correo electrónico y también aparecerá aquí. Mientras tanto puedes consultar anuncios.', 'info') : rejected ? callout('Solicitud rechazada', review.reason, 'warning') : incomplete ? callout('Alta no iniciada', 'Completa tus datos profesionales y presenta la documentación. Guardar estos datos todavía no envía una solicitud.', 'info') : '';
     return viewShell(`${pageHeading('Alta profesional · F02', rejected ? 'Subsanar documentación.' : pending ? 'Estamos revisando tu alta.' : 'Solicita el alta de transportista.', 'El alta está dirigida a empresas y profesionales autónomos con actividad de transporte activa.')} ${intro}${pending ? `<section class="panel timeline"><h2>Estado de la solicitud</h2><div class="timeline-step done"><span>✓</span><div><strong>Solicitud presentada</strong><p>${date(review.submitted)}</p></div></div><div class="timeline-step current"><span>2</span><div><strong>Revisión manual</strong><p>Comprobación de documentación y actividad.</p></div></div><div class="timeline-step"><span>3</span><div><strong>Resultado</strong><p>Aprobación o motivo de subsanación.</p></div></div></section>` : `<form class="panel form-panel" data-form="onboarding"><h2>${rejected ? 'Documentación corregida' : 'Datos profesionales'}</h2><div class="form-grid"><label>Tipo de profesional<select name="type" required><option>Empresa</option><option>Autónomo</option></select></label><label>Número de furgonetas<input name="vans" type="number" min="1" value="1" required></label><label class="span-2">Actividad de transporte<input name="activity" value="Transporte de mercancías por carretera" required></label><label class="span-2">Acreditación de empresa o autónomo<input name="doc1" type="file" required><span class="field-help">En el prototipo solo se simula la selección del archivo.</span></label><label class="span-2">Documentación de una o más furgonetas<input name="doc2" type="file" required></label><label class="span-2 choice"><input name="insurance" type="checkbox"> Dispongo de seguro de mercancías <span class="optional">Opcional</span></label></div><div class="form-error" hidden></div><div class="form-actions"><button class="button button-primary" type="submit">${rejected ? 'Enviar subsanación' : 'Solicitar revisión'}</button></div></form>`}`);
   }
   function renderAdminReviews() {
@@ -189,6 +190,10 @@
       const demoDocs = ['Acreditación profesional ficticia revisada', 'Documentación ficticia de la furgoneta revisada'];
       $$('input[type="file"]').forEach((input, index) => { const label = input.closest('label'); label.classList.add('choice'); label.innerHTML = `<input type="checkbox" name="${input.name}" required> ${demoDocs[index]}<span class="field-help">No selecciones ni adjuntes archivos reales.</span>`; });
     }
+    if (data.route === 'carrier-onboarding' && !data.session) {
+      const form = $('[data-form="onboarding"]');
+      if (form) form.replaceWith('<section class="panel onboarding-gate"><h2>Crea tu cuenta para empezar</h2><p>Primero registra tu correo, nombre y teléfono. Después podrás completar los datos profesionales y enviar la solicitud de alta.</p><button class="button button-primary" type="button" data-action="create-account">Crear una cuenta</button></section>');
+    }
   }
   function render() { renderHeader(); renderMain(); }
 
@@ -206,7 +211,12 @@
   function handleAction(action, target) {
     if (action === 'primary') { if (data.audience === 'client') setRoute(currentUser()?.role === 'client' ? 'publish' : 'login'); else setRoute('search'); }
     else if (action === 'login') setRoute('login');
-    else if (action === 'google-login') setRoute('complete-google');
+    else if (action === 'create-account') setRoute('complete-email');
+    else if (action === 'google-login') {
+      if (data.audience === 'client' && data.scenario === 'client') setRoute('client-dashboard');
+      else if (data.audience === 'carrier' && data.scenario !== 'guest-client') setRoute(data.scenario === 'carrier-approved' || data.scenario === 'carrier-pending' ? 'search' : 'carrier-onboarding');
+      else setRoute('complete-google');
+    }
     else if (action === 'add-item') { $('#extra-item').hidden = false; target.hidden = true; $('#extra-item input').focus(); }
     else if (action === 'close-modal') closeModal();
     else if (action === 'confirm-modal') { const callback = $('#modal-root')._confirm; if (callback) callback(); }
@@ -240,10 +250,14 @@
 
   function handleForm(form) {
     const type = form.dataset.form; const values = Object.fromEntries(new FormData(form)); if (!form.checkValidity()) { form.reportValidity(); return; }
-    if (type === 'login') setRoute('complete-email');
+    if (type === 'login') {
+      if (data.audience === 'client' && data.scenario === 'client') setRoute('client-dashboard');
+      else if (data.audience === 'carrier' && data.scenario !== 'guest-client') setRoute(data.scenario === 'carrier-approved' || data.scenario === 'carrier-pending' ? 'search' : 'carrier-onboarding');
+      else setRoute('complete-email');
+    }
     else if (type === 'complete-registration') {
       if (values.bio && hasContact(values.bio)) return formError(form, 'La biografía no puede incluir teléfono, correo ni enlaces de contacto.');
-      if (data.audience === 'carrier') { data.profile = { name: values.name, phone: values.phone, email: values.email, bio: values.bio }; data.scenario = 'carrier-pending'; data.session = { role: 'carrier', carrierId: 'TR-301', status: 'Pendiente', name: values.name }; data.route = 'carrier-onboarding'; } else { data.scenario = 'client'; data.session = { role: 'client' }; data.route = 'client-dashboard'; }
+      if (data.audience === 'carrier') { data.profile = { name: values.name, phone: values.phone, email: values.email, bio: values.bio }; data.scenario = 'carrier-incomplete'; data.session = { role: 'carrier', carrierId: 'TR-303', status: 'Incompleta', name: values.name }; data.route = 'carrier-onboarding'; } else { data.scenario = 'client'; data.session = { role: 'client' }; data.route = 'client-dashboard'; }
       persist(); render(); toast('Registro completado. Sesión simulada iniciada.', 'success');
     } else if (type === 'publish') {
       if (hasContact(values.notes || '')) return formError(form, 'Las notas no pueden incluir teléfonos, correos ni enlaces de contacto.'); if (values.delivery < values.pickup) return formError(form, 'La fecha final debe ser igual o posterior a la de recogida.');
@@ -283,7 +297,7 @@
   function registerWebMcp() {
     const context = document.modelContext; if (!context?.registerTool) return; const report = () => {};
     try {
-      Promise.resolve(context.registerTool({ name: 'load_demo_scenario', title: 'Cargar escenario del prototipo', description: 'Carga uno de los escenarios representativos del prototipo MiEnvio.es y actualiza la pantalla visible.', inputSchema: { type: 'object', properties: { scenario: { type: 'string', enum: ['guest-client', 'client', 'carrier-approved', 'carrier-pending', 'carrier-rejected', 'admin'] } }, required: ['scenario'], additionalProperties: false }, annotations: { readOnlyHint: false, untrustedContentHint: false }, execute(input) { if (!input || !['guest-client', 'client', 'carrier-approved', 'carrier-pending', 'carrier-rejected', 'admin'].includes(input.scenario)) throw new Error('Escenario no válido.'); setScenario(input.scenario); return { scenario: data.scenario, route: data.route }; } })).catch(report);
+      Promise.resolve(context.registerTool({ name: 'load_demo_scenario', title: 'Cargar escenario del prototipo', description: 'Carga uno de los escenarios representativos del prototipo MiEnvio.es y actualiza la pantalla visible.', inputSchema: { type: 'object', properties: { scenario: { type: 'string', enum: ['guest-client', 'client', 'client-incomplete', 'carrier-approved', 'carrier-pending', 'carrier-rejected', 'carrier-incomplete', 'admin'] } }, required: ['scenario'], additionalProperties: false }, annotations: { readOnlyHint: false, untrustedContentHint: false }, execute(input) { if (!input || !['guest-client', 'client', 'client-incomplete', 'carrier-approved', 'carrier-pending', 'carrier-rejected', 'carrier-incomplete', 'admin'].includes(input.scenario)) throw new Error('Escenario no válido.'); setScenario(input.scenario); return { scenario: data.scenario, route: data.route }; } })).catch(report);
       Promise.resolve(context.registerTool({ name: 'reset_demo_data', title: 'Reiniciar datos del prototipo', description: 'Restaura todos los anuncios, presupuestos, altas y comisiones ficticias del prototipo.', inputSchema: { type: 'object', properties: {}, additionalProperties: false }, annotations: { readOnlyHint: false, untrustedContentHint: false }, execute() { localStorage.removeItem(STORAGE_KEY); data = clone(seed); render(); return { reset: true, scenario: data.scenario }; } })).catch(report);
     } catch (_) { report(); }
   }
