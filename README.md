@@ -34,8 +34,8 @@ El selector gris **Modo prototipo**, separado de la cabecera de MiEnvio.es, camb
 
 1. Selecciona **Transportista · Alta no iniciada**. F03 dirige a **Completar alta**; completar los datos profesionales y marcar la documentación ficticia todavía no envía la solicitud.
 2. Pulsa **Enviar solicitud de alta**. F02 registra el estado Pendiente y muestra el estado de revisión.
-3. Selecciona **Transportista · Alta pendiente**. Puede buscar, abrir anuncios y leer presupuestos, pero los controles de preguntas y propuestas están deshabilitados.
-4. Selecciona **Transportista · Alta rechazada**. Se muestra el motivo y un formulario de subsanación; al enviarlo, la solicitud vuelve a Pendiente.
+3. Selecciona **Transportista · Alta pendiente**. Puede buscar, abrir anuncios y leer presupuestos, pero los controles de preguntas y propuestas están deshabilitados. El aviso enlaza con **Mi perfil → Documentación y estado**.
+4. Selecciona **Transportista · Alta rechazada**. Se muestra el motivo y un formulario de subsanación; al enviarlo, la solicitud vuelve a Pendiente. El mismo estado queda visible en **Documentación y estado**.
 
 ### Administrador
 

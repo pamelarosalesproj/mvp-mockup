@@ -142,7 +142,7 @@
   }
   function carrierRestriction() {
     const user = currentUser(); if (user?.role !== 'carrier' || user.status === 'Aprobada') return ''; const rejected = user.status === 'Rechazada';
-    return callout(rejected ? 'Tu alta necesita subsanación' : 'Tu alta está en revisión', rejected ? 'Puedes consultar anuncios y presupuestos. Corrige la documentación para poder preguntar y presentar presupuestos.' : 'Mientras revisamos la documentación puedes consultar anuncios y presupuestos, pero todavía no preguntar ni presentar propuestas.', 'warning', rejected ? '<button class="button button-warning" type="button" data-route="carrier-onboarding">Subsanar documentación</button>' : '');
+    return callout(rejected ? 'Tu alta necesita subsanación' : 'Tu alta está en revisión', rejected ? 'Puedes consultar anuncios y presupuestos. Corrige la documentación para poder preguntar y presentar presupuestos.' : 'Mientras revisamos la documentación puedes consultar anuncios y presupuestos, pero todavía no preguntar ni presentar propuestas.', 'warning', `<button class="button button-secondary" type="button" data-route="carrier-profile">Ver documentación y estado</button>${rejected ? '<button class="button button-warning" type="button" data-route="carrier-onboarding">Subsanar documentación</button>' : ''}`);
   }
   function resultCard(ad) { return `<article class="result-card" data-searchable="${[ad.origin, ad.destination, ad.category].join('|').toLowerCase()}"><div class="result-category"><span>${ad.category.slice(0, 1)}</span>${escapeHtml(ad.category)}</div><div class="result-body"><div class="result-head"><div><span class="reference">${ad.id}</span><h2>${escapeHtml(ad.title)}</h2></div>${status(ad.state)}</div><div class="card-route">${routeSummary(ad)}</div><p class="meta">${timeframe(ad)}</p></div><div class="result-side"><strong>${adQuotes(ad.id).length}</strong><span>presupuestos</span><button class="button button-secondary" type="button" data-route="ad-detail" data-id="${ad.id}">Ver detalle</button></div></article>`; }
   function renderSearch() {
@@ -193,6 +193,15 @@
     if (data.route === 'carrier-onboarding' && currentUser()?.role !== 'carrier') {
       const form = $('[data-form="onboarding"]');
       if (form) form.replaceWith('<section class="panel onboarding-gate"><h2>Crea tu cuenta para empezar</h2><p>Primero registra tu correo, nombre y teléfono. Después podrás completar los datos profesionales y enviar la solicitud de alta.</p><button class="button button-primary" type="button" data-action="create-account">Crear una cuenta</button></section>');
+    }
+    if (data.route === 'carrier-profile' && currentUser()?.role === 'carrier') {
+      const user = currentUser();
+      const review = data.carrierReviews.find((item) => item.carrierId === user.id);
+      const docs = review?.docs || ['Acreditación profesional ficticia revisada', 'Documentación ficticia de la furgoneta revisada', 'Acreditación de actividad'];
+      const statusText = review?.state || user.status;
+      const statusCopy = statusText === 'Pendiente' ? 'Solicitud presentada. El equipo de MiEnvio.es está revisando la documentación.' : statusText === 'Rechazada' ? review.reason : statusText === 'Incompleta' ? 'Todavía no has enviado una solicitud de alta.' : 'Solicitud aprobada. Puedes participar en el marketplace.';
+      const action = statusText === 'Rechazada' ? '<button class="button button-warning" type="button" data-route="carrier-onboarding">Subsanar documentación</button>' : statusText === 'Incompleta' ? '<button class="button button-primary" type="button" data-route="carrier-onboarding">Completar alta</button>' : '';
+      $('.profile-layout').insertAdjacentHTML('beforeend', `<section class="panel documentation-panel"><div class="doc-header"><div><p class="eyebrow">F02 · revisión del alta</p><h2>Documentación y estado</h2></div>${status(statusText)}</div><p class="doc-status-copy">${escapeHtml(statusCopy || '')}</p><ul class="document-list">${docs.map((doc) => `<li><span>✓</span><span>${escapeHtml(doc)}<small>Documento ficticio del prototipo</small></span></li>`).join('')}</ul>${review?.submitted ? `<p class="field-help">Solicitud enviada el ${date(review.submitted)} · Resultado visible en plataforma y correo simulado.</p>` : ''}${action ? `<div class="form-actions">${action}</div>` : ''}</section>`);
     }
   }
   function render() { renderHeader(); renderMain(); }
