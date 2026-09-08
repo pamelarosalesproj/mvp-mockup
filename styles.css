@@ -159,6 +159,11 @@ label:has(.required-mark) { display: block; }
 label:has(.required-mark) > input,
 label:has(.required-mark) > select,
 label:has(.required-mark) > textarea { display: block; margin-top: .4rem; }
+.form-panel[data-form="publish"] label:has(> :required) { display: block; }
+.form-panel[data-form="publish"] label:has(> :required)::before { content: "*"; color: var(--orange); font-weight: 800; margin-right: .2rem; }
+.form-panel[data-form="publish"] label:has(> :required) > input,
+.form-panel[data-form="publish"] label:has(> :required) > select,
+.form-panel[data-form="publish"] label:has(> :required) > textarea { display: block; margin-top: .4rem; }
 .form-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.1rem; }
 .span-2 { grid-column: span 2; }
 .form-panel { max-width: 900px; margin: 0 auto; padding: clamp(1.2rem, 4vw, 2.2rem); }
