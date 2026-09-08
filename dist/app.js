@@ -20,8 +20,8 @@
     savedSearches: [{ id: 'S-1', name: 'Madrid → Levante · Muebles', origin: 'Madrid', destination: 'Valencia', category: 'Muebles' }],
     profile: { name: 'Rutas Camino Sur S.L.', email: 'hola@caminosur.demo', phone: '954 480 210', bio: 'Transporte profesional de mobiliario y mercancía paletizada en la península.' },
     carrierReviews: [
-      { id: 'R-301', carrierId: 'TR-301', name: 'Logística Tormes S.L.', type: 'Empresa', vans: 3, activity: 'Transporte de mercancías por carretera', insurance: true, state: 'Pendiente', docs: ['CIF y alta censal', 'Permiso de circulación · 3 vehículos', 'Acreditación de actividad'], submitted: '2026-09-05', reason: '' },
-      { id: 'R-302', carrierId: 'TR-302', name: 'Álvaro Nieto', type: 'Autónomo', vans: 1, activity: 'Transporte ligero', insurance: false, state: 'Rechazada', docs: ['Alta de autónomo', 'Permiso de circulación'], submitted: '2026-09-03', reason: 'Falta acreditar que la actividad de transporte está activa.' }
+      { id: 'R-301', carrierId: 'TR-301', name: 'Logística Tormes S.L.', type: 'Empresa', vans: 3, activity: 'Transporte de mercancías por carretera', insurance: true, state: 'Pendiente', docs: ['CIF y alta censal', 'Permiso de circulación · 3 vehículos', 'Acreditación de actividad'], documentNumber: 'B-93218470', submitted: '2026-09-05', reason: '' },
+      { id: 'R-302', carrierId: 'TR-302', name: 'Álvaro Nieto', type: 'Autónomo', vans: 1, activity: 'Transporte ligero', insurance: false, state: 'Rechazada', docs: ['Alta de autónomo', 'Permiso de circulación'], documentNumber: 'Y1234567X', submitted: '2026-09-03', reason: 'Falta acreditar que la actividad de transporte está activa.' }
     ],
     commissionTiers: [{ id: 'T1', max: 100, rate: 20 }, { id: 'T2', max: 500, rate: 15 }, { id: 'T3', max: null, rate: 10 }],
     ads: [
@@ -186,10 +186,6 @@
       const measurements = $('.dimension-group');
       measurements.insertAdjacentHTML('afterend', '<button class="button-link span-2 add-item-button" type="button" data-action="add-item">+ Añadir otro elemento de la misma categoría</button><div class="form-grid span-2 extra-item" id="extra-item" hidden><label>Segundo elemento<input name="item2" placeholder="Ej. 6 sillas"></label><label>Peso aproximado (kg)<input name="weight2" type="number" min="1"></label><div class="dimension-group span-2"><span>Medidas aproximadas (cm)</span><div><label>Largo<input name="length2" type="number" min="1"></label><label>Ancho<input name="width2" type="number" min="1"></label><label>Alto<input name="height2" type="number" min="1"></label></div></div></div>');
     }
-    if (data.route === 'carrier-onboarding' && $('[data-form="onboarding"]')) {
-      const demoDocs = ['Acreditación profesional ficticia revisada', 'Documentación ficticia de la furgoneta revisada'];
-      $$('input[type="file"]').forEach((input, index) => { const label = input.closest('label'); label.classList.add('choice'); label.innerHTML = `<input type="checkbox" name="${input.name}" required> ${demoDocs[index]}<span class="field-help">No selecciones ni adjuntes archivos reales.</span>`; });
-    }
     if (data.route === 'carrier-onboarding' && currentUser()?.role !== 'carrier') {
       const form = $('[data-form="onboarding"]');
       if (form) form.replaceWith('<section class="panel onboarding-gate"><h2>Crea tu cuenta para empezar</h2><p>Primero registra tu correo, nombre y teléfono. Después podrás completar los datos profesionales y enviar la solicitud de alta.</p><button class="button button-primary" type="button" data-action="create-account">Crear una cuenta</button></section>');
@@ -197,11 +193,13 @@
     if (data.route === 'carrier-profile' && currentUser()?.role === 'carrier') {
       const user = currentUser();
       const review = data.carrierReviews.find((item) => item.carrierId === user.id);
-      const docs = review?.docs || ['Acreditación profesional ficticia revisada', 'Documentación ficticia de la furgoneta revisada', 'Acreditación de actividad'];
+      const docs = review?.docs || ['Acreditación de actividad'];
+      const professionalType = review?.type || (user.id === 'TR-204' ? 'Empresa' : 'Pendiente de completar');
+      const vanCount = review?.vans || (user.id === 'TR-204' ? 2 : 'Pendiente');
       const statusText = review?.state || user.status;
       const statusCopy = statusText === 'Pendiente' ? 'Solicitud presentada. El equipo de MiEnvio.es está revisando la documentación.' : statusText === 'Rechazada' ? review.reason : statusText === 'Incompleta' ? 'Todavía no has enviado una solicitud de alta.' : 'Solicitud aprobada. Puedes participar en el marketplace.';
       const action = statusText === 'Rechazada' ? '<button class="button button-warning" type="button" data-route="carrier-onboarding">Subsanar documentación</button>' : statusText === 'Incompleta' ? '<button class="button button-primary" type="button" data-route="carrier-onboarding">Completar alta</button>' : '';
-      $('.profile-layout').insertAdjacentHTML('beforeend', `<section class="panel documentation-panel"><div class="doc-header"><div><p class="eyebrow">F02 · revisión del alta</p><h2>Documentación y estado</h2></div>${status(statusText)}</div><p class="doc-status-copy">${escapeHtml(statusCopy || '')}</p><ul class="document-list">${docs.map((doc) => `<li><span>✓</span><span>${escapeHtml(doc)}<small>Documento ficticio del prototipo</small></span></li>`).join('')}</ul>${review?.submitted ? `<p class="field-help">Solicitud enviada el ${date(review.submitted)} · Resultado visible en plataforma y correo simulado.</p>` : ''}${action ? `<div class="form-actions">${action}</div>` : ''}</section>`);
+      $('.profile-layout').insertAdjacentHTML('beforeend', `<section class="panel documentation-panel"><div class="doc-header"><div><p class="eyebrow">F02 · revisión del alta</p><h2>Documentación y estado</h2></div>${status(statusText)}</div><p class="doc-status-copy">${escapeHtml(statusCopy || '')}</p><div class="review-facts"><div><span>Tipo de profesional</span><strong>${escapeHtml(professionalType)}</strong></div><div><span>Número de furgonetas</span><strong>${escapeHtml(String(vanCount))}</strong></div></div><div class="document-fields"><label>Número de documento<input type="text" value="${escapeHtml(review?.documentNumber || (statusText === 'Aprobada' ? 'B-12345678' : ''))}" placeholder="Número de documento"></label><label>Documentación de la furgoneta<input type="file"></label></div><ul class="document-list">${docs.map((doc) => `<li><span>✓</span><span>${escapeHtml(doc)}<small>Documento registrado en la solicitud</small></span></li>`).join('')}</ul>${review?.submitted ? `<p class="field-help">Solicitud enviada el ${date(review.submitted)} · Resultado visible en plataforma y correo simulado.</p>` : ''}${action ? `<div class="form-actions">${action}</div>` : ''}</section>`);
     }
   }
   function render() { renderHeader(); renderMain(); }
