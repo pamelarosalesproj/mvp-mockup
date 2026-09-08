@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Prototipo navegable de MiEnvio.es para validar los flujos del marketplace de transporte.">
+  <title>MiEnvio.es · Prototipo</title>
+  <link rel="stylesheet" href="styles.css?v=4">
+</head>
+<body>
+  <a class="skip-link" href="#app">Ir al contenido</a>
+  <aside class="demo-bar" aria-label="Controles del prototipo">
+    <div class="demo-inner">
+      <div class="demo-label"><span aria-hidden="true">◆</span> Modo prototipo</div>
+      <label for="demo-scenario">Escenario</label>
+      <select id="demo-scenario">
+        <option value="guest-client">Visitante · Cliente</option>
+        <option value="client">Cliente · Con varios presupuestos</option>
+        <option value="carrier-approved">Transportista · Alta aprobada</option>
+        <option value="carrier-pending">Transportista · Alta pendiente</option>
+        <option value="carrier-rejected">Transportista · Alta rechazada</option>
+        <option value="admin">Administrador</option>
+      </select>
+      <button class="demo-reset" id="demo-reset" type="button">Reiniciar datos</button>
+    </div>
+  </aside>
+
+  <div class="audience-tabs" aria-label="Tipo de visitante">
+    <div class="shell audience-inner">
+      <button class="audience-tab is-active" data-audience="client" type="button">Para clientes</button>
+      <button class="audience-tab" data-audience="carrier" type="button">Para transportistas</button>
+    </div>
+  </div>
+
+  <header class="site-header" id="site-header">
+    <div class="shell header-inner">
+      <button class="brand" type="button" data-route="home" aria-label="Ir al inicio">MiEnvio<span>.es</span></button>
+      <nav class="main-nav" aria-label="Navegación principal" id="main-nav"></nav>
+      <button class="menu-toggle" id="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav">Menú</button>
+      <div class="header-actions" id="header-actions">
+        <button class="button button-ghost" type="button" data-action="login">Iniciar sesión</button>
+        <button class="button button-primary" type="button" data-action="primary">Publicar anuncio</button>
+      </div>
+    </div>
+  </header>
+
+  <main id="app" tabindex="-1"></main>
+
+  <div id="toast-region" class="toast-region" aria-live="polite" aria-atomic="true"></div>
+  <div id="modal-root"></div>
+  <script src="app.js?v=4"></script>
+</body>
+</html>
