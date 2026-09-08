@@ -218,7 +218,7 @@ dd { margin: 0; }
 .answer p { margin: .25rem 0 0; }
 .thread { padding: 1rem 0; border-bottom: 1px solid var(--line); }
 .thread:last-child { border-bottom: 0; }
-.thread summary { display: grid; grid-template-columns: 1fr auto; gap: .25rem .8rem; cursor: pointer; list-style: none; }
+.thread summary { display: grid; grid-template-columns: auto 1fr; gap: .25rem .8rem; cursor: pointer; list-style: none; }
 .thread summary::-webkit-details-marker { display: none; }
 .thread summary::before { content: "＋"; color: var(--orange); font-weight: 800; grid-row: span 2; }
 .thread[open] summary::before { content: "−"; }
@@ -231,6 +231,8 @@ dd { margin: 0; }
 .thread-create { margin-bottom: 1.2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--line); }
 .quote-table-panel { overflow-x: auto; }
 .quote-table-panel table { min-width: 860px; }
+.market-quotes:has(.quote-table-panel) { display: block; }
+.market-quotes .quote-table-panel { width: 100%; }
 .market-quotes { min-width: 0; }
 .questions { min-width: 0; overflow: hidden; }
 .questions form { margin-top: 1rem; }
