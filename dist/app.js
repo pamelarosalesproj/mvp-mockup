@@ -201,6 +201,7 @@
     if ((data.route === 'client-ad' || data.route === 'ad-detail') && selected) { const questions = data.questions.filter((question) => question.adId === selected.id); const container = $('.questions'); if (container) container.innerHTML = threadSection(questions, selected.state === 'Activo'); }
     if (data.route === 'ad-detail') { const detail = $('.detail-grid'); const quoteForm = $('.quote-form-section'); if (detail && quoteForm) detail.parentNode.insertBefore(quoteForm, detail.nextElementSibling); }
     if (data.route === 'publish') {
+      $('.page-heading .eyebrow').textContent = 'Nuevo anuncio · F05-A';
       const dateToggle = $('[name="specificDates"]'); const dateFields = $('[data-date-fields]');
       const syncDates = () => { dateFields.hidden = !dateToggle.checked; dateFields.querySelectorAll('input[type="date"]').forEach((input) => { input.required = dateToggle.checked; }); };
       dateToggle.addEventListener('change', syncDates); syncDates();
