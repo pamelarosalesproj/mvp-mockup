@@ -150,6 +150,10 @@ input:disabled, select:disabled, textarea:disabled { background: #edf1f3; color:
 .field-help { color: var(--muted); font-size: .75rem; font-weight: 500; }
 .required-mark { color: var(--orange); font-weight: 800; }
 .required-note { margin: 0 0 1rem; }
+.article-list-title { margin: 1.5rem 0 .7rem; color: var(--ink); }
+.article-block { padding: 1rem; border: 1px dashed #b8c8d0; border-radius: 10px; background: var(--surface-soft); margin-bottom: .7rem; }
+.article-block .form-grid { gap: .8rem; }
+.add-item-button { margin: .1rem 0 1.4rem; }
 label:has(.required-mark) { display: block; }
 label:has(.required-mark) > input,
 label:has(.required-mark) > select,
