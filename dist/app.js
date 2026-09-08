@@ -188,7 +188,8 @@
     }
     if (data.route === 'carrier-onboarding' && currentUser()?.role !== 'carrier') {
       const form = $('[data-form="onboarding"]');
-      if (form) form.replaceWith('<section class="panel onboarding-gate"><h2>Crea tu cuenta para empezar</h2><p>Primero registra tu correo, nombre y teléfono. Después podrás completar los datos profesionales y enviar la solicitud de alta.</p><button class="button button-primary" type="button" data-action="create-account">Crear una cuenta</button></section>');
+      const gate = '<section class="panel onboarding-gate"><h2>Crea tu cuenta para empezar</h2><p>Primero registra tu correo, nombre y teléfono. Después podrás completar los datos profesionales y enviar la solicitud de alta.</p><button class="button button-primary" type="button" data-action="create-account">Crear una cuenta</button></section>';
+      if (form) form.replaceWith(gate); else if (!$('.onboarding-gate')) $('.workspace').insertAdjacentHTML('beforeend', gate);
     }
     if (data.route === 'carrier-profile' && currentUser()?.role === 'carrier') {
       const user = currentUser();
