@@ -148,6 +148,8 @@ input:disabled, select:disabled, textarea:disabled { background: #edf1f3; color:
 .add-item-button { justify-self: start; padding: .35rem 0; }
 .extra-item { margin-top: .35rem; padding: 1rem; border: 1px dashed #b8c8d0; border-radius: 10px; background: var(--surface-soft); }
 .field-help { color: var(--muted); font-size: .75rem; font-weight: 500; }
+.required-mark { color: var(--orange); font-weight: 800; }
+.required-note { margin: 0 0 1rem; }
 .form-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.1rem; }
 .span-2 { grid-column: span 2; }
 .form-panel { max-width: 900px; margin: 0 auto; padding: clamp(1.2rem, 4vw, 2.2rem); }
