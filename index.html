@@ -12,19 +12,27 @@
   <aside class="demo-bar" aria-label="Controles del prototipo">
     <div class="demo-inner">
       <div class="demo-label"><span aria-hidden="true">◆</span> Modo prototipo</div>
-      <label for="demo-scenario">Escenario</label>
+      <label for="demo-scenario">Vista de prueba</label>
       <select id="demo-scenario">
-        <option value="guest-client">Visitante · Cliente</option>
-        <option value="guest-carrier">Visitante · Transportista</option>
-        <option value="client">Cliente · Perfil único</option>
-        <option value="dual-client">Ambos perfiles · Como cliente</option>
-        <option value="dual-carrier">Ambos perfiles · Como transportista</option>
-        <option value="client-incomplete">Cliente · Registro incompleto</option>
-        <option value="carrier-approved">Transportista · Alta aprobada</option>
-        <option value="carrier-pending">Transportista · Alta pendiente</option>
-        <option value="carrier-rejected">Transportista · Alta rechazada</option>
-        <option value="carrier-incomplete">Transportista · Alta no iniciada</option>
-        <option value="admin">Administrador</option>
+        <optgroup label="Sin sesión">
+          <option value="guest-client">Landing pública · Clientes</option>
+          <option value="guest-carrier">Landing pública · Transportistas</option>
+        </optgroup>
+        <optgroup label="Cuentas activas">
+          <option value="client">Solo perfil cliente · Panel</option>
+          <option value="carrier-approved">Solo perfil transportista · Aprobado</option>
+          <option value="dual-client">Ambos perfiles · Vista cliente</option>
+          <option value="dual-carrier">Ambos perfiles · Vista transportista</option>
+        </optgroup>
+        <optgroup label="Registros y revisiones">
+          <option value="client-incomplete">Registro de cliente · Incompleto</option>
+          <option value="carrier-incomplete">Alta transportista · Sin enviar</option>
+          <option value="carrier-pending">Alta transportista · En revisión</option>
+          <option value="carrier-rejected">Alta transportista · Requiere correcciones</option>
+        </optgroup>
+        <optgroup label="Administración">
+          <option value="admin">Administración · Altas y comisiones</option>
+        </optgroup>
       </select>
       <button class="demo-reset" id="demo-reset" type="button">Reiniciar datos</button>
     </div>
@@ -52,6 +60,6 @@
 
   <div id="toast-region" class="toast-region" aria-live="polite" aria-atomic="true"></div>
   <div id="modal-root"></div>
-  <script src="app.js?v=10"></script>
+  <script src="app.js?v=11"></script>
 </body>
 </html>

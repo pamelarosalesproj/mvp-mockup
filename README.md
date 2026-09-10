@@ -39,28 +39,28 @@ No introduzcas datos reales en este prototipo. Los datos introducidos se guardan
 
 ### Acceso y perfiles
 
-1. Selecciona **Visitante · Cliente** o **Visitante · Transportista** y comprueba que las dos pestañas muestran landing pages diferentes.
-2. Desde **Visitante · Transportista**, pulsa **Entrar o registrarse**. Usa `marta.ruiz@demo.es` para simular una clienta existente y, después de identificarla, completa solo los datos necesarios para añadir su perfil transportista.
+1. Selecciona **Landing pública · Clientes** o **Landing pública · Transportistas** y comprueba que las dos pestañas muestran landing pages diferentes.
+2. Desde **Landing pública · Transportistas**, pulsa **Entrar o registrarse**. Usa `marta.ruiz@demo.es` para simular una clienta existente y, después de identificarla, completa solo los datos necesarios para añadir su perfil transportista.
 3. Repite el acceso con `hola@caminosur.demo` para simular una cuenta que ya tiene perfil transportista; abrirá directamente **Buscar anuncios**.
-4. Selecciona **Ambos perfiles · Como cliente**, abre el menú de cuenta y pulsa **Ir al panel transportista**. La navegación cambia sin pedir otro login.
+4. Selecciona **Ambos perfiles · Vista cliente**, abre el menú de cuenta y pulsa **Ir al panel transportista**. La navegación cambia sin pedir otro login.
 5. Desde el perfil transportista pulsa **Enviar como cliente** para regresar. Los IDs públicos `CL-7K4P` y `TR-510` permanecen separados.
-6. Usa **Cliente · Perfil único** o **Transportista · Alta aprobada** para probar la activación del perfil que falta.
+6. Usa **Solo perfil cliente · Panel** o **Solo perfil transportista · Aprobado** para probar la activación del perfil que falta.
 7. Pulsa **Cerrar sesión**. Se cierra la cuenta completa y vuelven a mostrarse las pestañas públicas.
-8. En **Ambos perfiles · Como transportista**, comprueba que los anuncios del perfil cliente de la misma cuenta no aparecen en la búsqueda.
+8. En **Ambos perfiles · Vista transportista**, comprueba que los anuncios del perfil cliente de la misma cuenta no aparecen en la búsqueda.
 
 ### Cliente
 
-1. Selecciona **Ambos perfiles · Como cliente**.
+1. Selecciona **Ambos perfiles · Vista cliente**.
 2. Entra en **Mesa de comedor y 6 sillas** para comparar presupuestos activos, rechazados y caducados.
 3. Rechaza un presupuesto: la justificación es obligatoria y el anuncio sigue activo.
 4. Acepta otro: el anuncio y la propuesta elegida pasan a Aceptado; las demás propuestas activas pasan a Inactivo; las rechazadas y caducadas conservan su estado; aparece el contacto del transportista seleccionado y se crea una comisión.
 5. Vuelve a **Mis anuncios** y abre **12 cajas de libros** para comprobar el estado sin presupuestos.
 6. Usa **Publicar anuncio** para recorrer las validaciones, añadir un segundo elemento de la misma categoría y crear un anuncio Activo con cero presupuestos.
-7. Para probar F01 selecciona **Visitante · Cliente** y pulsa **Entrar o registrarse**. Los correos de demostración reconocen cuentas existentes; cualquier otro correo continúa al registro del perfil cliente. Nombre y teléfono son obligatorios. El escenario **Cliente · Registro incompleto** simula una cuenta existente a la que le falta un dato obligatorio.
+7. Para probar F01 selecciona **Landing pública · Clientes** y pulsa **Entrar o registrarse**. Los correos de demostración reconocen cuentas existentes; cualquier otro correo continúa al registro del perfil cliente. Nombre y teléfono son obligatorios. La vista **Registro de cliente · Incompleto** simula una cuenta existente a la que le falta un dato obligatorio.
 
 ### Transportista aprobado
 
-1. Selecciona **Transportista · Alta aprobada**.
+1. Selecciona **Solo perfil transportista · Aprobado**.
 2. Filtra anuncios por origen, destino, categoría o fecha; prueba una búsqueda sin resultados y guarda los criterios.
 3. Abre **Mesa de comedor y 6 sillas**. Comprueba que se ven importes y condiciones de otros transportistas sin datos de contacto.
 4. Publica una pregunta sin datos de contacto y envía uno o varios presupuestos. La fecha de trabajo y el vencimiento son opcionales. La propuesta enviada aparece en **Mis presupuestos** y no tiene acciones de edición o eliminación.
@@ -70,13 +70,13 @@ No introduzcas datos reales en este prototipo. Los datos introducidos se guardan
 
 ### Transportista pendiente o rechazado
 
-1. Selecciona **Transportista · Alta no iniciada**. F03 dirige a **Completar alta**; completar los datos profesionales y marcar la documentación ficticia todavía no envía la solicitud.
+1. Selecciona **Alta transportista · Sin enviar**. F03 dirige a **Completar alta**; completar los datos profesionales y marcar la documentación ficticia todavía no envía la solicitud.
 2. Pulsa **Enviar solicitud de alta**. F02 registra el estado Pendiente y muestra el estado de revisión.
-3. Selecciona **Transportista · Alta pendiente**. Puede buscar, abrir anuncios y leer presupuestos, pero los controles de preguntas y propuestas están deshabilitados. El aviso enlaza con **Mi perfil → Documentación y estado**.
-4. Selecciona **Transportista · Alta rechazada**. Se muestra el motivo y un formulario de subsanación; al enviarlo, la solicitud vuelve a Pendiente. El mismo estado queda visible en **Documentación y estado**.
+3. Selecciona **Alta transportista · En revisión**. Puede buscar, abrir anuncios y leer presupuestos, pero los controles de preguntas y propuestas están deshabilitados. El aviso enlaza con **Mi perfil → Documentación y estado**.
+4. Selecciona **Alta transportista · Requiere correcciones**. Se muestra el motivo y un formulario de subsanación; al enviarlo, la solicitud vuelve a Pendiente. El mismo estado queda visible en **Documentación y estado**.
 
 ### Administrador
 
-1. Selecciona **Administrador**.
+1. Selecciona **Administración · Altas y comisiones**.
 2. En **Altas de transportistas**, aprueba una solicitud o recházala indicando un motivo obligatorio. El prototipo refleja el resultado en la plataforma y simula el aviso por correo.
 3. En **Configurar comisiones**, modifica límites o porcentajes. El último tramo permanece sin límite y las comisiones ya generadas no se recalculan.
