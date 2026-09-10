@@ -10,6 +10,9 @@
 /.idea/
 .DS_Store
 
+# Private product documents
+/PRD*.md
+
 # Credentials and local environment
 .env
 .env.*

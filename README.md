@@ -37,9 +37,19 @@ No introduzcas datos reales en este prototipo. Los datos introducidos se guardan
 
 ## Recorridos de demostración
 
+### Acceso y perfiles
+
+1. Selecciona **Visitante · Cliente** o **Visitante · Transportista** y comprueba que las dos pestañas muestran landing pages diferentes.
+2. Inicia sesión desde cada audiencia. El formulario es el mismo, pero cliente abre **Mis anuncios** y transportista abre **Buscar anuncios**.
+3. Selecciona **Ambos perfiles · Como cliente**, abre el menú de cuenta y pulsa **Ir al panel transportista**. La navegación cambia sin pedir otro login.
+4. Desde el perfil transportista pulsa **Enviar como cliente** para regresar. Los IDs públicos `CL-7K4P` y `TR-510` permanecen separados.
+5. Usa **Cliente · Perfil único** o **Transportista · Alta aprobada** para probar la activación del perfil que falta.
+6. Pulsa **Cerrar sesión**. Se cierra la cuenta completa y vuelven a mostrarse las pestañas públicas.
+7. En **Ambos perfiles · Como transportista**, comprueba que los anuncios del perfil cliente de la misma cuenta no aparecen en la búsqueda.
+
 ### Cliente
 
-1. Selecciona **Cliente · Con varios presupuestos**.
+1. Selecciona **Ambos perfiles · Como cliente**.
 2. Entra en **Mesa de comedor y 6 sillas** para comparar presupuestos activos, rechazados y caducados.
 3. Rechaza un presupuesto: la justificación es obligatoria y el anuncio sigue activo.
 4. Acepta otro: el anuncio y la propuesta elegida pasan a Aceptado; las demás propuestas activas pasan a Inactivo; las rechazadas y caducadas conservan su estado; aparece el contacto del transportista seleccionado y se crea una comisión.
