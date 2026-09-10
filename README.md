@@ -40,7 +40,7 @@ No introduzcas datos reales en este prototipo. Los datos introducidos se guardan
 ### Acceso y perfiles
 
 1. Selecciona **Visitante · Cliente** o **Visitante · Transportista** y comprueba que las dos pestañas muestran landing pages diferentes.
-2. Desde **Visitante · Transportista**, pulsa **Darme de alta**. Primero aparece el acceso común: usa `marta.ruiz@demo.es` para simular una clienta existente y, después de identificarla, completa solo los datos necesarios para añadir su perfil transportista.
+2. Desde **Visitante · Transportista**, pulsa **Entrar o registrarse**. Usa `marta.ruiz@demo.es` para simular una clienta existente y, después de identificarla, completa solo los datos necesarios para añadir su perfil transportista.
 3. Repite el acceso con `hola@caminosur.demo` para simular una cuenta que ya tiene perfil transportista; abrirá directamente **Buscar anuncios**.
 4. Selecciona **Ambos perfiles · Como cliente**, abre el menú de cuenta y pulsa **Ir al panel transportista**. La navegación cambia sin pedir otro login.
 5. Desde el perfil transportista pulsa **Enviar como cliente** para regresar. Los IDs públicos `CL-7K4P` y `TR-510` permanecen separados.

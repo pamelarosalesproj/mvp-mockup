@@ -106,7 +106,7 @@
     let nav = ''; let actions = '';
     if (!user) {
       nav = navButtons([['home', 'Cómo funciona']]);
-      actions = `<button class="button button-ghost" type="button" data-action="login">Entrar o registrarse</button>${data.audience === 'carrier' ? '<button class="button button-primary" type="button" data-action="start-carrier">Darme de alta</button>' : ''}`;
+      actions = '<button class="button button-ghost" type="button" data-action="login">Entrar o registrarse</button>';
     } else if (user.role === 'client') {
       nav = navButtons([['client-dashboard', 'Mis anuncios'], ['publish', 'Publicar anuncio']]); actions = accountMenu('MR', user.name, `Cliente · ${user.id}`, data.session.hasCarrier ? 'Ir al panel transportista' : 'Trabajar como transportista', 'carrier');
     } else if (user.role === 'carrier') {
@@ -283,7 +283,6 @@
 
   function handleAction(action, target) {
     if (action === 'primary') { data.requestedContext = data.audience; if (data.audience === 'client') setRoute(currentUser()?.role === 'client' ? 'publish' : 'login'); else setRoute('search'); }
-    else if (action === 'start-carrier') { data.audience = 'carrier'; data.requestedContext = 'carrier'; setRoute('login'); }
     else if (action === 'login') { data.requestedContext = data.audience || 'client'; setRoute('login'); }
     else if (action === 'create-account') { data.requestedContext = data.audience || 'client'; setRoute('complete-email'); }
     else if (action === 'google-login') loginDemoAccount();
