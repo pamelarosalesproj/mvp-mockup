@@ -106,7 +106,7 @@
     let nav = ''; let actions = '';
     if (!user) {
       nav = navButtons([['home', 'Cómo funciona']]);
-      actions = `<button class="button button-ghost" type="button" data-action="login">Entrar o registrarse</button><button class="button button-primary" type="button" data-action="${data.audience === 'carrier' ? 'start-carrier' : 'primary'}">${data.audience === 'carrier' ? 'Darme de alta' : 'Publicar anuncio'}</button>`;
+      actions = `<button class="button button-ghost" type="button" data-action="login">Entrar o registrarse</button>${data.audience === 'carrier' ? '<button class="button button-primary" type="button" data-action="start-carrier">Darme de alta</button>' : ''}`;
     } else if (user.role === 'client') {
       nav = navButtons([['client-dashboard', 'Mis anuncios'], ['publish', 'Publicar anuncio']]); actions = accountMenu('MR', user.name, `Cliente · ${user.id}`, data.session.hasCarrier ? 'Ir al panel transportista' : 'Trabajar como transportista', 'carrier');
     } else if (user.role === 'carrier') {
