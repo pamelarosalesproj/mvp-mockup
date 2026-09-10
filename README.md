@@ -40,12 +40,13 @@ No introduzcas datos reales en este prototipo. Los datos introducidos se guardan
 ### Acceso y perfiles
 
 1. Selecciona **Visitante · Cliente** o **Visitante · Transportista** y comprueba que las dos pestañas muestran landing pages diferentes.
-2. Inicia sesión desde cada audiencia. El formulario es el mismo, pero cliente abre **Mis anuncios** y transportista abre **Buscar anuncios**.
-3. Selecciona **Ambos perfiles · Como cliente**, abre el menú de cuenta y pulsa **Ir al panel transportista**. La navegación cambia sin pedir otro login.
-4. Desde el perfil transportista pulsa **Enviar como cliente** para regresar. Los IDs públicos `CL-7K4P` y `TR-510` permanecen separados.
-5. Usa **Cliente · Perfil único** o **Transportista · Alta aprobada** para probar la activación del perfil que falta.
-6. Pulsa **Cerrar sesión**. Se cierra la cuenta completa y vuelven a mostrarse las pestañas públicas.
-7. En **Ambos perfiles · Como transportista**, comprueba que los anuncios del perfil cliente de la misma cuenta no aparecen en la búsqueda.
+2. Desde **Visitante · Transportista**, pulsa **Darme de alta**. Primero aparece el acceso común: usa `marta.ruiz@demo.es` para simular una clienta existente y, después de identificarla, completa solo los datos necesarios para añadir su perfil transportista.
+3. Repite el acceso con `hola@caminosur.demo` para simular una cuenta que ya tiene perfil transportista; abrirá directamente **Buscar anuncios**.
+4. Selecciona **Ambos perfiles · Como cliente**, abre el menú de cuenta y pulsa **Ir al panel transportista**. La navegación cambia sin pedir otro login.
+5. Desde el perfil transportista pulsa **Enviar como cliente** para regresar. Los IDs públicos `CL-7K4P` y `TR-510` permanecen separados.
+6. Usa **Cliente · Perfil único** o **Transportista · Alta aprobada** para probar la activación del perfil que falta.
+7. Pulsa **Cerrar sesión**. Se cierra la cuenta completa y vuelven a mostrarse las pestañas públicas.
+8. En **Ambos perfiles · Como transportista**, comprueba que los anuncios del perfil cliente de la misma cuenta no aparecen en la búsqueda.
 
 ### Cliente
 
