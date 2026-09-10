@@ -70,7 +70,7 @@ No introduzcas datos reales en este prototipo. Los datos introducidos se guardan
 
 ### Transportista pendiente o rechazado
 
-1. Selecciona **Alta transportista · Sin enviar**. F03 dirige a **Completar alta**; completar los datos profesionales y marcar la documentación ficticia todavía no envía la solicitud.
+1. Selecciona **Alta transportista · Sin enviar**. F03 dirige a **Completar alta**; en búsqueda, presupuestos, comisiones y perfil el aviso indica que la solicitud aún no fue enviada. Completar los campos sin pulsar el envío no cambia el estado.
 2. Pulsa **Enviar solicitud de alta**. F02 registra el estado Pendiente y muestra el estado de revisión.
 3. Selecciona **Alta transportista · En revisión**. Puede buscar, abrir anuncios y leer presupuestos, pero los controles de preguntas y propuestas están deshabilitados. El aviso enlaza con **Mi perfil → Documentación y estado**.
 4. Selecciona **Alta transportista · Requiere correcciones**. Se muestra el motivo y un formulario de subsanación; al enviarlo, la solicitud vuelve a Pendiente. El mismo estado queda visible en **Documentación y estado**.
