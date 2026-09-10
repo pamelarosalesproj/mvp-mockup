@@ -56,7 +56,7 @@ No introduzcas datos reales en este prototipo. Los datos introducidos se guardan
 4. Acepta otro: el anuncio y la propuesta elegida pasan a Aceptado; las demás propuestas activas pasan a Inactivo; las rechazadas y caducadas conservan su estado; aparece el contacto del transportista seleccionado y se crea una comisión.
 5. Vuelve a **Mis anuncios** y abre **12 cajas de libros** para comprobar el estado sin presupuestos.
 6. Usa **Publicar anuncio** para recorrer las validaciones, añadir un segundo elemento de la misma categoría y crear un anuncio Activo con cero presupuestos.
-7. Para probar F01 selecciona **Visitante · Cliente**, pulsa **Crear una cuenta** desde la cabecera o entra en **Iniciar sesión** y usa el enlace de creación. Continúa con correo o con Google simulado. Nombre y teléfono son obligatorios en ambos métodos; una cuenta ya creada puede iniciar sesión directamente en el panel. El escenario **Cliente · Registro incompleto** simula una cuenta existente a la que le falta un dato obligatorio.
+7. Para probar F01 selecciona **Visitante · Cliente** y pulsa **Entrar o registrarse**. Los correos de demostración reconocen cuentas existentes; cualquier otro correo continúa al registro del perfil cliente. Nombre y teléfono son obligatorios. El escenario **Cliente · Registro incompleto** simula una cuenta existente a la que le falta un dato obligatorio.
 
 ### Transportista aprobado
 

@@ -17,7 +17,7 @@
   };
 
   const seed = {
-    audience: 'client', requestedContext: 'client', scenario: 'guest-client', session: null, route: 'home', selectedAd: 'A-104',
+    audience: 'client', requestedContext: 'client', pendingEmail: '', scenario: 'guest-client', session: null, route: 'home', selectedAd: 'A-104',
     clientProfile: { ownerId: 'C-1', publicId: 'CL-7K4P', name: 'Marta Ruiz', email: 'marta.ruiz@demo.es', phone: '612 345 780' },
     savedSearches: [{ id: 'S-1', name: 'Madrid → Levante · Muebles', origin: 'Madrid', destination: 'Valencia', category: 'Muebles' }],
     profile: { name: 'Rutas Camino Sur S.L.', email: 'hola@caminosur.demo', phone: '954 480 210', bio: 'Transporte profesional de mobiliario y mercancía paletizada en la península.' },
@@ -106,7 +106,7 @@
     let nav = ''; let actions = '';
     if (!user) {
       nav = navButtons([['home', 'Cómo funciona']]);
-      actions = `<button class="button button-ghost" type="button" data-action="login">Iniciar sesión</button><button class="button button-primary" type="button" data-action="${data.audience === 'carrier' ? 'start-carrier' : 'primary'}">${data.audience === 'carrier' ? 'Darme de alta' : 'Publicar anuncio'}</button>`;
+      actions = `<button class="button button-ghost" type="button" data-action="login">Entrar o registrarse</button><button class="button button-primary" type="button" data-action="${data.audience === 'carrier' ? 'start-carrier' : 'primary'}">${data.audience === 'carrier' ? 'Darme de alta' : 'Publicar anuncio'}</button>`;
     } else if (user.role === 'client') {
       nav = navButtons([['client-dashboard', 'Mis anuncios'], ['publish', 'Publicar anuncio']]); actions = accountMenu('MR', user.name, `Cliente · ${user.id}`, data.session.hasCarrier ? 'Ir al panel transportista' : 'Trabajar como transportista', 'carrier');
     } else if (user.role === 'carrier') {
@@ -133,7 +133,7 @@
   }
   function renderLogin() {
     const role = data.requestedContext === 'carrier' ? 'transportista' : 'cliente';
-    return viewShell(`<div class="auth-layout"><section class="auth-copy"><p class="eyebrow">Acceso único</p><h1>Inicia sesión en MiEnvio.es.</h1><p>La misma cuenta permite usar un perfil cliente, un perfil transportista o ambos.</p>${['Usa un único email para acceder.','El registro de cada perfil conserva sus propios datos.','Podrás cambiar de perfil desde el menú de cuenta.'].map((text, i) => `<div class="mini-feature"><span>${i + 1}</span><p>${text}</p></div>`).join('')}</section><section class="panel auth-panel"><h2>Iniciar sesión</h2><p class="context-note">Continuarás en el área de <strong>${role}</strong></p><button class="button button-google" type="button" data-action="google-login">G <span>Continuar con Google</span></button><div class="divider"><span>o con correo electrónico</span></div><form data-form="login"><label>Correo electrónico<input type="email" name="email" value="marta.ruiz@demo.es" required></label><button class="button button-primary button-block" type="submit">Iniciar sesión</button></form><p class="create-account-line">¿No tienes cuenta? <button class="button-link" type="button" data-action="create-account">Crear una cuenta</button></p><p class="form-note">Prueba <strong>marta.ruiz@demo.es</strong> como cliente existente o <strong>hola@caminosur.demo</strong> como transportista existente.</p></section></div>`, 'auth-page');
+    return viewShell(`<div class="auth-layout"><section class="auth-copy"><p class="eyebrow">Acceso único</p><h1>Entra o regístrate en MiEnvio.es.</h1><p>La misma cuenta permite usar un perfil cliente, un perfil transportista o ambos.</p>${['Escribe tu email para identificar tu cuenta.','Si es nuevo, completarás el perfil que has elegido.','Si ya existe, entrarás o añadirás el perfil que te falta.'].map((text, i) => `<div class="mini-feature"><span>${i + 1}</span><p>${text}</p></div>`).join('')}</section><section class="panel auth-panel"><h2>Entrar o registrarse</h2><p class="context-note">Continuarás en el área de <strong>${role}</strong></p><button class="button button-google" type="button" data-action="google-login">G <span>Continuar con Google</span></button><div class="divider"><span>o con correo electrónico</span></div><form data-form="login"><label>Correo electrónico<input type="email" name="email" value="marta.ruiz@demo.es" required></label><button class="button button-primary button-block" type="submit">Continuar</button></form><p class="form-note">Prueba <strong>marta.ruiz@demo.es</strong> como cliente existente, <strong>hola@caminosur.demo</strong> como transportista existente o cualquier otro correo para registrarte.</p></section></div>`, 'auth-page');
   }
   function renderCompleteRegistration(method) {
     const role = data.requestedContext === 'carrier' ? 'transportista' : 'cliente'; const authenticated = Boolean(data.session); const adding = authenticated && !hasProfile(data.requestedContext);
@@ -141,7 +141,7 @@
     const addingClient = adding && role === 'cliente';
     const name = adding ? '' : method === 'google' || authenticated ? (role === 'cliente' ? data.clientProfile.name : data.profile.name) : '';
     const phone = addingCarrier ? data.clientProfile.phone : addingClient ? data.profile.phone : authenticated ? (role === 'cliente' ? (data.session.incomplete ? '' : data.clientProfile.phone) : data.profile.phone) : '';
-    const email = addingCarrier ? data.clientProfile.email : addingClient ? data.profile.email : role === 'cliente' ? data.clientProfile.email : '';
+    const email = addingCarrier ? data.clientProfile.email : addingClient ? data.profile.email : authenticated ? (role === 'cliente' ? data.clientProfile.email : data.profile.email) : data.pendingEmail;
     const bio = role === 'transportista' && authenticated && !adding ? data.profile.bio : '';
     const intro = adding ? `Tu cuenta ya existe. Completa únicamente los datos necesarios para usarla también como ${role}.` : `Estos datos se utilizarán para tu actividad como ${role} y permanecerán ocultos hasta que se acepte un presupuesto.`;
     return viewShell(`<div class="auth-layout"><section class="auth-copy"><p class="eyebrow">${adding ? 'Añadir perfil' : authenticated ? 'Completar perfil' : `Primer acceso · ${role}`}</p><h1>${adding ? `Activa tu perfil ${role}.` : 'Completa tu perfil.'}</h1><p>${intro}</p>${role === 'transportista' ? callout('Revisión manual', 'Después podrás presentar la documentación y seguir su estado.', 'info') : ''}</section><section class="panel auth-panel"><div class="method-pill">${authenticated ? 'Cuenta ya autenticada' : `${method === 'google' ? 'G' : '@'} Acceso simulado con ${method === 'google' ? 'Google' : 'correo'}`}</div><h2>Datos del perfil ${role}</h2><form data-form="complete-registration"><label>${role === 'transportista' ? 'Nombre o razón social' : 'Nombre completo'}<input name="name" value="${escapeHtml(name)}" required></label><label>Teléfono<input name="phone" type="tel" value="${escapeHtml(phone)}" placeholder="612 345 678" required pattern="[0-9 +]{9,15}"></label><label>Correo de contacto<input name="email" type="email" value="${escapeHtml(email)}" required></label>${role === 'transportista' ? `<label>Biografía<textarea name="bio" rows="4" required placeholder="Experiencia y tipo de transporte, sin datos de contacto">${escapeHtml(bio)}</textarea></label>` : ''}<div class="form-error" hidden></div><button class="button button-primary button-block" type="submit">${adding ? 'Activar perfil' : 'Completar registro'}</button></form></section></div>`, 'auth-page');
@@ -235,7 +235,7 @@
     }
     if (data.route === 'carrier-onboarding' && currentUser()?.role !== 'carrier') {
       const form = $('[data-form="onboarding"]');
-      const gate = '<section class="panel onboarding-gate"><h2>Crea tu cuenta para empezar</h2><p>Primero registra tu correo, nombre y teléfono. Después podrás completar los datos profesionales y enviar la solicitud de alta.</p><button class="button button-primary" type="button" data-action="create-account">Crear una cuenta</button></section>';
+      const gate = '<section class="panel onboarding-gate"><h2>Entra o regístrate para empezar</h2><p>Primero identificaremos tu cuenta. Después podrás completar los datos profesionales y enviar la solicitud de alta.</p><button class="button button-primary" type="button" data-action="login">Entrar o registrarse</button></section>';
       if (form) form.outerHTML = gate; else if (!$('.onboarding-gate')) $('.workspace').insertAdjacentHTML('beforeend', gate);
     }
     if (data.route === 'carrier-profile' && currentUser()?.role === 'carrier') {
@@ -264,10 +264,13 @@
   function rateFor(amount) { return data.commissionTiers.find((tier) => tier.max == null || amount <= tier.max)?.rate ?? 0; }
   function loginDemoAccount(email = 'marta.ruiz@demo.es') {
     const context = data.requestedContext === 'carrier' ? 'carrier' : 'client'; const normalized = email.trim().toLowerCase();
+    data.pendingEmail = normalized;
     if (normalized === 'hola@caminosur.demo') {
       data.profile = clone(seed.profile); data.session = { activeContext: 'carrier', hasClient: false, hasCarrier: true, carrierId: 'TR-204', carrierStatus: 'Aprobada', carrierName: 'Rutas Camino Sur' }; data.scenario = 'carrier-approved'; data.route = context === 'client' ? 'complete-email' : 'search';
-    } else {
+    } else if (normalized === 'marta.ruiz@demo.es') {
       data.clientProfile = clone(seed.clientProfile); data.session = { activeContext: 'client', hasClient: true, hasCarrier: false, clientOwnerId: 'C-1' }; data.scenario = 'client'; data.route = context === 'carrier' ? 'complete-email' : 'client-dashboard';
+    } else {
+      data.session = null; data.scenario = `guest-${context}`; data.route = 'complete-email';
     }
     persist(); render(); toast(data.route === 'complete-email' ? 'Sesión iniciada. Completa el perfil que quieres añadir.' : 'Sesión iniciada.', 'success');
   }
@@ -329,7 +332,7 @@
       const existing = data.session || { activeContext: data.requestedContext, hasClient: false, hasCarrier: false };
       if (data.requestedContext === 'carrier') { data.profile = { name: values.name, phone: values.phone, email: values.email, bio: values.bio }; Object.assign(existing, { activeContext: 'carrier', hasCarrier: true, carrierId: existing.carrierId || 'TR-303', carrierStatus: 'Incompleta', carrierName: values.name }); data.scenario = existing.hasClient ? 'dual-carrier' : 'carrier-incomplete'; data.route = 'carrier-onboarding'; }
       else { const newClientIdentity = existing.hasCarrier && !existing.hasClient ? { ownerId: 'C-5', publicId: 'CL-5R8S' } : {}; data.clientProfile = { ...data.clientProfile, ...newClientIdentity, name: values.name, phone: values.phone, email: values.email }; Object.assign(existing, { activeContext: 'client', hasClient: true, clientOwnerId: data.clientProfile.ownerId, incomplete: false }); data.scenario = existing.hasCarrier ? 'dual-client' : 'client'; data.route = 'client-dashboard'; }
-      data.session = existing;
+      data.session = existing; data.pendingEmail = '';
       persist(); render(); toast('Registro completado. Sesión simulada iniciada.', 'success');
     } else if (type === 'publish') {
       if (hasContact(values.notes || '')) return formError(form, 'Las notas no pueden incluir teléfonos, correos ni enlaces de contacto.'); if (values.specificDates && values.delivery && values.pickup && values.delivery < values.pickup) return formError(form, 'La fecha final debe ser igual o posterior a la fecha inicial.');
