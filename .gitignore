@@ -13,6 +13,8 @@
 # Private product documents
 /PRD*.md
 /PRD-files/
+# Keep every file inside the private PRD directory out of version control.
+/PRD-files/**
 
 # Credentials and local environment
 .env
