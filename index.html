@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Prototipo navegable de MiEnvio.es para validar los flujos del marketplace de transporte.">
   <title>MiEnvio.es · Prototipo</title>
-  <link rel="stylesheet" href="styles.css?v=12">
+  <link rel="stylesheet" href="styles.css?v=13">
 </head>
 <body>
   <a class="skip-link" href="#app">Ir al contenido</a>
@@ -15,23 +15,24 @@
       <label for="demo-scenario">Vista de prueba</label>
       <select id="demo-scenario">
         <optgroup label="Sin sesión">
-          <option value="guest-client">Landing pública · Clientes</option>
-          <option value="guest-carrier">Landing pública · Transportistas</option>
+          <option value="guest-client">ESC-01 · Landing pública · Clientes</option>
+          <option value="guest-carrier">ESC-02 · Landing pública · Transportistas</option>
         </optgroup>
         <optgroup label="Cuentas activas">
-          <option value="client">Solo perfil cliente · Panel</option>
-          <option value="carrier-approved">Solo perfil transportista · Aprobado</option>
-          <option value="dual-client">Ambos perfiles · Vista cliente</option>
-          <option value="dual-carrier">Ambos perfiles · Vista transportista</option>
+          <option value="client">ESC-03 · Solo perfil cliente · Panel</option>
+          <option value="carrier-approved">ESC-04 · Solo perfil transportista · Aprobado</option>
+          <option value="dual-client">ESC-05 · Ambos perfiles · Vista cliente</option>
+          <option value="dual-carrier">ESC-06 · Ambos perfiles · Vista transportista</option>
         </optgroup>
         <optgroup label="Registros y revisiones">
-          <option value="client-incomplete">Registro de cliente · Incompleto</option>
-          <option value="carrier-incomplete">Alta transportista · Sin enviar</option>
-          <option value="carrier-pending">Alta transportista · En revisión</option>
-          <option value="carrier-rejected">Alta transportista · Requiere correcciones</option>
+          <option value="client-incomplete">ESC-07 · Registro cliente · Incompleto</option>
+          <option value="carrier-registration-incomplete">ESC-08 · Registro transportista · Incompleto</option>
+          <option value="carrier-incomplete">ESC-09 · Alta transportista · No enviada</option>
+          <option value="carrier-pending">ESC-10 · Alta transportista · En revisión</option>
+          <option value="carrier-rejected">ESC-11 · Alta transportista · Requiere correcciones</option>
         </optgroup>
         <optgroup label="Administración">
-          <option value="admin">Administración · Altas y comisiones</option>
+          <option value="admin">ESC-12 · Administración · Altas y comisiones</option>
         </optgroup>
       </select>
       <button class="demo-reset" id="demo-reset" type="button">Reiniciar datos</button>
@@ -60,6 +61,6 @@
 
   <div id="toast-region" class="toast-region" aria-live="polite" aria-atomic="true"></div>
   <div id="modal-root"></div>
-  <script src="app.js?v=13"></script>
+  <script src="app.js?v=14"></script>
 </body>
 </html>

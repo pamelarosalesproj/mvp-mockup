@@ -12,6 +12,7 @@
 
 # Private product documents
 /PRD*.md
+/PRD-files/
 
 # Credentials and local environment
 .env
