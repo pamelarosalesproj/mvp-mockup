@@ -66,7 +66,7 @@ h1 { max-width: 700px; margin: 0; color: var(--navy); font-family: Georgia, "Tim
 .category-icon { width: 44px; height: 44px; display: grid; place-items: center; background: #eaf2f5; color: var(--navy); border-radius: 12px; }
 .route-card small { display: block; color: var(--muted); font-size: .75rem; }
 .route-card strong { display: block; color: var(--navy); }
-.status { display: inline-flex; align-items: center; width: fit-content; padding: .25rem .55rem; border-radius: 999px; font-size: .75rem; font-weight: 800; }
+.status { display: inline-flex; align-items: center; width: fit-content; padding: .35rem .7rem; border-radius: 999px; font-size: .875rem; line-height: 1.25; font-weight: 800; }
 .status-active { color: #106653; background: #dff4ee; }
 .route-line { display: grid; grid-template-columns: 1fr 80px 1fr; gap: .7rem; align-items: center; padding: 1.5rem 0; }
 .route-dot { display: inline-block; width: 9px; height: 9px; margin-right: .35rem; border-radius: 50%; background: var(--orange); }
@@ -95,11 +95,12 @@ h1 { max-width: 700px; margin: 0; color: var(--navy); font-family: Georgia, "Tim
 .muted { color: var(--muted); }
 .reference { display: block; color: var(--muted); font-size: .75rem; font-weight: 800; text-transform: uppercase; letter-spacing: .08em; }
 .meta { color: var(--muted); font-size: .875rem; }
-.status-inactivo { color: #52636e; background: #e7ecef; }
-.status-aceptado, .status-aprobada { color: #106653; background: #dff4ee; }
-.status-eliminado, .status-rechazado, .status-rechazada { color: #8b2f2f; background: #f9e1e1; }
-.status-caducado { color: #7a5b16; background: #f7edcf; }
-.status-en-revision, .status-no-enviada { color: #8b5a00; background: #fff0cb; }
+.status-inactive { color: #52636e; background: #e7ecef; }
+.status-accepted { color: #fff; background: var(--teal); }
+.status-approved { color: #106653; background: #dff4ee; }
+.status-deleted, .status-rejected { color: #8b2f2f; background: #f9e1e1; }
+.status-expired { color: #7a5b16; background: #f7edcf; }
+.status-in-review, .status-not-submitted { color: #8b5a00; background: #fff0cb; }
 .account-chip { display: flex; gap: .65rem; align-items: center; border: 0; background: transparent; text-align: left; color: var(--navy); font-weight: 800; padding: .25rem; }
 .account-chip > span:first-child { width: 38px; height: 38px; display: grid; place-items: center; border-radius: 50%; background: var(--orange); color: #fff; font-size: .75rem; }
 .account-chip small { display: block; color: var(--muted); font-weight: 650; }
@@ -122,6 +123,7 @@ h1 { max-width: 700px; margin: 0; color: var(--navy); font-family: Georgia, "Tim
 .summary-card.accent span, .summary-card.accent p { color: #fff; }
 .section-bar { margin: 2.6rem 0 1rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
 .section-bar h2 { margin: 0; color: var(--navy); font-size: 1.45rem; }
+.section-bar-actions { display: flex; align-items: center; justify-content: flex-end; gap: 1rem; flex-wrap: wrap; }
 .segmented { display: inline-flex; padding: .25rem; border: 1px solid var(--line); background: #fff; border-radius: 9px; }
 .segmented button { border: 0; background: transparent; color: var(--muted); border-radius: 6px; padding: .4rem .7rem; font-size: .8125rem; font-weight: 800; }
 .segmented button.is-active { color: var(--navy); background: #eaf0f3; }
@@ -387,6 +389,8 @@ tbody tr:last-child td { border-bottom: 0; }
   .steps article, .steps article:first-child { border-left: 0; border-right: 0; border-bottom: 1px solid var(--line); padding: 1.3rem 0; }
   .workspace { padding-top: 2rem; }
   .page-heading { align-items: flex-start; flex-direction: column; }
+  .section-bar { align-items: flex-start; flex-direction: column; }
+  .section-bar-actions { justify-content: flex-start; }
   .page-heading h1, .auth-copy h1 { font-size: 2.7rem; }
   .summary-grid, .card-grid, .quotes-list, .market-quotes, .profile-layout, .detail-grid, .quote-form-section, .auth-layout { grid-template-columns: 1fr; }
   .documentation-panel { grid-column: auto; }
