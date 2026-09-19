@@ -14,25 +14,104 @@
       <div class="demo-label"><span aria-hidden="true">◆</span> Modo prototipo</div>
       <label for="demo-scenario">Vista de prueba</label>
       <select id="demo-scenario">
-        <optgroup label="Sin sesión">
+        <optgroup label="F00 · Landing pública">
           <option value="guest-client">ESC-01 · Landing pública · Clientes</option>
           <option value="guest-carrier">ESC-02 · Landing pública · Transportistas</option>
         </optgroup>
-        <optgroup label="Cuentas activas">
+        <optgroup label="F01 · Perfil cliente">
+          <option value="guest-client">ESC-01 · Landing pública · Clientes</option>
+          <option value="client-incomplete">ESC-07 · Registro cliente · Incompleto</option>
           <option value="client">ESC-03 · Solo perfil cliente · Panel</option>
           <option value="carrier-approved">ESC-04 · Solo perfil transportista · Aprobado</option>
+        </optgroup>
+        <optgroup label="F02-A · Perfil transportista">
+          <option value="guest-carrier">ESC-02 · Landing pública · Transportistas</option>
+          <option value="carrier-registration-incomplete">ESC-08 · Registro transportista · Incompleto</option>
+          <option value="carrier-incomplete">ESC-09 · Alta transportista · No enviada</option>
+          <option value="carrier-pending">ESC-10 · Alta transportista · En revisión</option>
+          <option value="client">ESC-03 · Solo perfil cliente · Panel</option>
+        </optgroup>
+        <optgroup label="F02-B · Revisar el alta de transportista">
+          <option value="admin">ESC-12 · Administración · Altas y comisiones</option>
+        </optgroup>
+        <optgroup label="F02-C · Subsanar un alta transportista rechazada">
+          <option value="guest-carrier">ESC-02 · Landing pública · Transportistas</option>
+          <option value="carrier-rejected">ESC-11 · Alta transportista · Requiere correcciones</option>
+        </optgroup>
+        <optgroup label="F03-A · Iniciar sesión y abrir el contexto solicitado">
+          <option value="guest-client">ESC-01 · Landing pública · Clientes</option>
+          <option value="guest-carrier">ESC-02 · Landing pública · Transportistas</option>
+        </optgroup>
+        <optgroup label="F03-B · Cambiar entre los paneles cliente y transportista">
           <option value="dual-client">ESC-05 · Ambos perfiles · Vista cliente</option>
           <option value="dual-carrier">ESC-06 · Ambos perfiles · Vista transportista</option>
+          <option value="client">ESC-03 · Solo perfil cliente · Panel</option>
+          <option value="carrier-approved">ESC-04 · Solo perfil transportista · Aprobado</option>
         </optgroup>
-        <optgroup label="Registros y revisiones">
-          <option value="client-incomplete">ESC-07 · Registro cliente · Incompleto</option>
-          <option value="carrier-registration-incomplete">ESC-08 · Registro transportista · Incompleto</option>
+        <optgroup label="F03-C · Cerrar sesión (desde cualquier panel)">
+          <option disabled>Disponible en el menú de cuenta de cualquier escenario con panel</option>
+        </optgroup>
+        <optgroup label="F04 · Editar perfil transportista">
+          <option value="carrier-approved">ESC-04 · Solo perfil transportista · Aprobado</option>
+          <option value="dual-carrier">ESC-06 · Ambos perfiles · Vista transportista</option>
           <option value="carrier-incomplete">ESC-09 · Alta transportista · No enviada</option>
           <option value="carrier-pending">ESC-10 · Alta transportista · En revisión</option>
           <option value="carrier-rejected">ESC-11 · Alta transportista · Requiere correcciones</option>
         </optgroup>
-        <optgroup label="Administración">
+        <optgroup label="F04-A · Editar el perfil cliente">
+          <option value="client">ESC-03 · Solo perfil cliente · Panel</option>
+          <option value="dual-client">ESC-05 · Ambos perfiles · Vista cliente</option>
+        </optgroup>
+        <optgroup label="F05-A &amp; F05-B - Mis anuncios &amp; publicar anuncio">
+          <option value="client">ESC-03 · Solo perfil cliente · Panel</option>
+          <option value="dual-client">ESC-05 · Ambos perfiles · Vista cliente</option>
+        </optgroup>
+        <optgroup label="F06 &amp; F07 - Buscar anuncios &amp; Ver detalle anuncio">
+          <option value="carrier-approved">ESC-04 · Solo perfil transportista · Aprobado</option>
+          <option value="dual-carrier">ESC-06 · Ambos perfiles · Vista transportista</option>
+          <option value="carrier-incomplete">ESC-09 · Alta transportista · No enviada</option>
+          <option value="carrier-pending">ESC-10 · Alta transportista · En revisión</option>
+          <option value="carrier-rejected">ESC-11 · Alta transportista · Requiere correcciones</option>
+        </optgroup>
+        <optgroup label="F08 · Realizar y responder preguntas del anuncio">
+          <option disabled>Panel Transportista</option>
+          <option value="carrier-approved">ESC-04 · Solo perfil transportista · Aprobado</option>
+          <option value="dual-carrier">ESC-06 · Ambos perfiles · Vista transportista</option>
+          <option value="carrier-incomplete">ESC-09 · Alta transportista · No enviada</option>
+          <option value="carrier-pending">ESC-10 · Alta transportista · En revisión</option>
+          <option value="carrier-rejected">ESC-11 · Alta transportista · Requiere correcciones</option>
+          <option disabled>Panel Cliente</option>
+          <option value="client">ESC-03 · Solo perfil cliente · Panel</option>
+          <option value="dual-client">ESC-05 · Ambos perfiles · Vista cliente</option>
+        </optgroup>
+        <optgroup label="F09 · Eliminar anuncio">
+          <option value="client">ESC-03 · Solo perfil cliente · Panel</option>
+          <option value="dual-client">ESC-05 · Ambos perfiles · Vista cliente</option>
+        </optgroup>
+        <optgroup label="F10 · Enviar presupuesto">
+          <option value="carrier-approved">ESC-04 · Solo perfil transportista · Aprobado</option>
+          <option value="dual-carrier">ESC-06 · Ambos perfiles · Vista transportista</option>
+          <option value="carrier-incomplete">ESC-09 · Alta transportista · No enviada</option>
+          <option value="carrier-pending">ESC-10 · Alta transportista · En revisión</option>
+          <option value="carrier-rejected">ESC-11 · Alta transportista · Requiere correcciones</option>
+        </optgroup>
+        <optgroup label="F11 &amp; F12 · Aceptar o rechazar presupuesto">
+          <option value="client">ESC-03 · Solo perfil cliente · Panel</option>
+          <option value="dual-client">ESC-05 · Ambos perfiles · Vista cliente</option>
+        </optgroup>
+        <optgroup label="F13 · Consultar presupuestos enviados">
+          <option value="carrier-approved">ESC-04 · Solo perfil transportista · Aprobado</option>
+          <option value="dual-carrier">ESC-06 · Ambos perfiles · Vista transportista</option>
+        </optgroup>
+        <optgroup label="F14 · Configurar comisiones por rango">
           <option value="admin">ESC-12 · Administración · Altas y comisiones</option>
+        </optgroup>
+        <optgroup label="F15 · Consultar facturas mensuales y sus comisiones">
+          <option value="carrier-approved">ESC-04 · Solo perfil transportista · Aprobado</option>
+          <option value="dual-carrier">ESC-06 · Ambos perfiles · Vista transportista</option>
+          <option value="carrier-incomplete">ESC-09 · Alta transportista · No enviada</option>
+          <option value="carrier-pending">ESC-10 · Alta transportista · En revisión</option>
+          <option value="carrier-rejected">ESC-11 · Alta transportista · Requiere correcciones</option>
         </optgroup>
       </select>
       <button class="demo-reset" id="demo-reset" type="button">Reiniciar datos</button>
@@ -61,6 +140,6 @@
 
   <div id="toast-region" class="toast-region" aria-live="polite" aria-atomic="true"></div>
   <div id="modal-root"></div>
-  <script src="app.js?v=20"></script>
+  <script src="app.js?v=21"></script>
 </body>
 </html>

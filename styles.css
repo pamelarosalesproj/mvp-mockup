@@ -147,6 +147,7 @@ h1 { max-width: 700px; margin: 0; color: var(--navy); font-family: Georgia, "Tim
 .mini-feature p { margin: 0; color: var(--ink); }
 .auth-panel { padding: 2rem; }
 .auth-panel h2 { font-size: 1.6rem; }
+.auth-email-field { margin-bottom: 1rem; }
 .profile-form-section + .profile-form-section { margin-top: 1.8rem; padding-top: 1.5rem; border-top: 1px solid var(--line); }
 .profile-form-section h3 { margin: 0 0 .35rem; color: var(--navy); font-size: 1.05rem; }
 .profile-form-section > .field-help { display: block; margin-bottom: 1rem; }
