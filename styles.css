@@ -290,6 +290,11 @@ dd { margin: 0; }
 .market-quote p { min-height: 62px; }
 .privacy-note > span { display: block; color: var(--orange); font-size: 2.2rem; }
 .quote-form-section { display: grid; grid-template-columns: .7fr 1.3fr; gap: 2rem; margin-top: 2rem; }
+.quote-form-section form { min-width: 0; }
+.quote-form-section .form-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: start; gap: 1.25rem; }
+.quote-form-section .form-grid label { align-content: start; }
+.quote-form-section .form-grid textarea { min-height: 6rem; }
+.quote-form-section form > .button { margin-top: 1.25rem; }
 .table-panel { overflow: hidden; background: #fff; border: 1px solid var(--line); border-radius: 14px; }
 table { width: 100%; border-collapse: collapse; }
 th, td { padding: .9rem 1rem; text-align: left; border-bottom: 1px solid var(--line); }
@@ -429,6 +434,7 @@ tbody tr:last-child td { border-bottom: 0; }
   .page-heading h1, .auth-copy h1 { font-size: 2.35rem; }
   .summary-grid { grid-template-columns: 1fr; }
   .form-grid { grid-template-columns: 1fr; }
+  .quote-form-section .form-grid { grid-template-columns: 1fr; }
   .article-block .form-grid { grid-template-columns: 1fr; }
   .span-2 { grid-column: span 1; }
   .dimension-group > div { grid-template-columns: 1fr 1fr 1fr; }
