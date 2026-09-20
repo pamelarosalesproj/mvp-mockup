@@ -42,6 +42,16 @@ Usa únicamente los datos ficticios que te entreguemos. No introduzcas informaci
 
 > En tu perfil de cliente aparece **Marta Ruiz**, pero quieres que figure **Marta Ruiz López**. Actualiza ese dato y comprueba que se guardó.
 
+### C7. Revisar una mudanza con varios artículos y fotos
+
+> Tienes una **Mudanza de vivienda** publicada de **Madrid a Valencia**. Revisa el anuncio y comprueba que puedes distinguir qué artículos se transportan y ver la foto de cada uno.
+
+### C8. Publicar una mudanza con fotos — misión opcional
+
+> Necesitas organizar una mudanza de **Madrid a Valencia**. Publica un anuncio con **1 mesa, 6 sillas, 1 frigorífico y 2 armarios**. Añade una foto a los artículos usando las imágenes que te entregue quien modera la prueba.
+
+**Datos para la misión:** código postal de origen `28013`, código postal de destino `46001`. Las imágenes de referencia son `mesa.png`, `silla.png`, `refri.png` y `armario.png`.
+
 ---
 
 ## Misiones como transportista
@@ -80,6 +90,10 @@ Usa únicamente los datos ficticios que te entreguemos. No introduzcas informaci
 
 > En tu perfil transportista figura **Rutas Camino Sur S.L.**, pero la razón social correcta para esta prueba es **Rutas Camino Sur y Costa S.L.**. Actualiza ese dato y comprueba que se guardó.
 
+### T9. Enviar una propuesta con un rango de fechas
+
+> Eres el transportista identificado como **TR-204** y vas a presupuestar la **Mudanza de vivienda** de **Madrid a Valencia**. Propón realizar el trabajo entre el **10 y el 12 de octubre de 2026**, por **920 €**, y deja la propuesta válida hasta el **5 de octubre de 2026**.
+
 ---
 
 ## Preparación para quien modera la prueba
@@ -89,15 +103,15 @@ Usa únicamente los datos ficticios que te entreguemos. No introduzcas informaci
 | Misiones | Punto de partida recomendado | Qué permite observar |
 | --- | --- | --- |
 | C1–C2 | `ESC-01 · Landing pública · Clientes`, con datos restablecidos | Si descubre cómo identificarse, completar el perfil y publicar. |
-| C3–C6 | `ESC-03 · Solo perfil cliente · Panel`, con datos restablecidos | Si encuentra sus anuncios, responde, compara propuestas, retira un anuncio y edita su perfil. |
+| C3–C8 | `ESC-03 · Solo perfil cliente · Panel`, con datos restablecidos | Si encuentra sus anuncios, responde, compara propuestas, retira un anuncio, edita su perfil y publica o revisa una mudanza con fotos. |
 | T1 | `ESC-02 · Landing pública · Transportistas`, sin sesión | Si encuentra la lista pública y entiende qué puede consultar sin entrar. |
 | T2 | `ESC-02 · Landing pública · Transportistas`, con datos restablecidos | Si entiende el registro del perfil y la solicitud de alta. |
-| T3–T8 | `ESC-04 · Solo perfil transportista · Aprobado`, con datos restablecidos | Si encuentra una oportunidad, presenta una propuesta, pregunta, consulta comisiones y edita su perfil. |
+| T3–T9 | `ESC-04 · Solo perfil transportista · Aprobado`, con datos restablecidos | Si encuentra una oportunidad, presenta propuestas con fechas, pregunta, consulta comisiones y edita su perfil. |
 
 ### Resultados de referencia
 
 - **C3:** el anuncio de la mesa tiene una pregunta pendiente sobre la recogida a primera hora.
-- **C4:** la propuesta `P-241` es de **295 €**, con fecha de trabajo **20 de septiembre de 2026**. Hay otras propuestas que permiten observar si la persona compara precio, fecha y estado.
+- **C4:** la propuesta `P-241` es de **295 €**, con fechas de trabajo del **20 al 20 de septiembre de 2026**. Hay otras propuestas que permiten observar si la persona compara precio, fechas y estado.
 - **C5:** el anuncio de las cajas está Activo al iniciar el escenario `ESC-03`.
 - **C6:** el perfil cliente comienza con el nombre **Marta Ruiz**.
 - **T1:** hay un anuncio Activo de un sofá modular de **Barcelona a Alicante**, sin fechas definidas.
@@ -106,13 +120,16 @@ Usa únicamente los datos ficticios que te entreguemos. No introduzcas informaci
 - **T6:** el sofá modular corresponde a un anuncio Activo de **Barcelona a Alicante**. La persona puede publicar una pregunta nueva con `TR-204` aprobado.
 - **T7:** en septiembre de 2026 hay dos comisiones para `TR-204`: **52 €** por la moto clásica y **68,50 €** por la moto de colección; suman **120,50 €**. El mockup muestra un resumen mensual, no una factura fiscal descargable.
 - **T8:** el perfil transportista comienza con la razón social **Rutas Camino Sur S.L.**.
+- **C7:** el anuncio **A-116, Mudanza de vivienda**, contiene una mesa, seis sillas, un frigorífico y dos armarios. Tiene fotos en los cuatro tipos de artículo y presupuestos activos.
+- **C8:** las fotos se asocian al artículo concreto al que se suben; al quitar un artículo, su foto también desaparece. El anuncio no se publica si se intenta usar un formato no admitido o una foto de más de 10 MB.
+- **T9:** la propuesta nueva conserva por separado el rango de trabajo **10–12 de octubre de 2026** y su vencimiento del **5 de octubre de 2026**.
 
 ### Reglas prácticas de preparación
 
 1. Restablece los datos antes de cada participante y antes de las misiones que requieren el escenario inicial indicado en la tabla.
-2. **No encadenes C2 con C4 sobre el anuncio recién creado:** el mockup no genera propuestas para ese anuncio. Presenta C3–C6 como una situación posterior con datos ya existentes.
+2. **No encadenes C2 con C4 sobre el anuncio recién creado:** el mockup no genera propuestas para ese anuncio. Presenta C3–C7 como una situación posterior con datos ya existentes. Para C8, empieza con los datos restablecidos y considera la publicación como una misión independiente.
 3. **No encadenes T2 con T3 como si la aprobación fuese automática:** cambia al escenario aprobado entre misiones y explica solamente: «Tu alta ya ha sido aprobada; continuamos unos días después».
-4. Entrega los datos ficticios y los archivos de prueba antes de la misión correspondiente. No entregues las respuestas ni los nombres de las pantallas.
+4. Entrega los datos ficticios y los archivos de prueba antes de la misión correspondiente. Para C7, A-116 ya debe existir; para C8, entrega las imágenes sin indicar en qué artículo debe colocarse cada una. No entregues las respuestas ni los nombres de las pantallas.
 5. Si se usa la web pública para las sesiones, verifica primero que contiene la versión del mockup que deseas evaluar.
 
 ## Registro breve de observación

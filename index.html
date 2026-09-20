@@ -5,15 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Prototipo navegable de MiEnvio.es para validar los flujos del marketplace de transporte.">
   <title>MiEnvio.es · Prototipo</title>
-  <link rel="stylesheet" href="styles.css?v=16">
+  <link rel="stylesheet" href="styles.css?v=20">
 </head>
 <body>
   <a class="skip-link" href="#app">Ir al contenido</a>
   <aside class="demo-bar" aria-label="Controles del prototipo">
     <div class="demo-inner">
       <div class="demo-label"><span aria-hidden="true">◆</span> Modo prototipo</div>
-      <label for="demo-scenario">Vista de prueba</label>
-      <select id="demo-scenario">
+      <label class="demo-toggle" for="demo-scenario-mode"><input id="demo-scenario-mode" type="checkbox" checked> Selector libre</label>
+      <select id="demo-scenario" aria-label="Escenario de prueba">
         <optgroup label="F00 · Landing pública">
           <option value="guest-client">ESC-01 · Landing pública · Clientes</option>
           <option value="guest-carrier">ESC-02 · Landing pública · Transportistas</option>
@@ -66,6 +66,10 @@
           <option value="client">ESC-03 · Solo perfil cliente · Panel</option>
           <option value="dual-client">ESC-05 · Ambos perfiles · Vista cliente</option>
         </optgroup>
+        <optgroup label="F05-C · Editar anuncio">
+          <option value="client">ESC-03 · Solo perfil cliente · Panel</option>
+          <option value="dual-client">ESC-05 · Ambos perfiles · Vista cliente</option>
+        </optgroup>
         <optgroup label="F06 &amp; F07 - Buscar anuncios &amp; Ver detalle anuncio">
           <option value="carrier-approved">ESC-04 · Solo perfil transportista · Aprobado</option>
           <option value="dual-carrier">ESC-06 · Ambos perfiles · Vista transportista</option>
@@ -114,6 +118,29 @@
           <option value="carrier-rejected">ESC-11 · Alta transportista · Requiere correcciones</option>
         </optgroup>
       </select>
+      <select id="demo-mission-scenario" aria-label="Misión y escenario de inicio" hidden>
+        <optgroup label="Misiones como cliente">
+          <option value="C1" data-scenario="guest-client">C1 · Crear tu perfil · Inicio: ESC-01 · Landing pública · Clientes</option>
+          <option value="C2" data-scenario="client">C2 · Publicar una necesidad · Inicio: ESC-03 · Panel cliente</option>
+          <option value="C3" data-scenario="client">C3 · Responder una pregunta · Inicio: ESC-03 · Panel cliente</option>
+          <option value="C4" data-scenario="client">C4 · Elegir una propuesta · Inicio: ESC-03 · Panel cliente</option>
+          <option value="C5" data-scenario="client">C5 · Retirar un anuncio · Inicio: ESC-03 · Panel cliente</option>
+          <option value="C6" data-scenario="client">C6 · Corregir el nombre de tu perfil · Inicio: ESC-03 · Panel cliente</option>
+          <option value="C7" data-scenario="client">C7 · Revisar una mudanza con fotos · Inicio: ESC-03 · Panel cliente</option>
+          <option value="C8" data-scenario="client">C8 · Publicar una mudanza con fotos · Inicio: ESC-03 · Panel cliente</option>
+        </optgroup>
+        <optgroup label="Misiones como transportista">
+          <option value="T1" data-scenario="guest-carrier">T1 · Explorar oportunidades · Inicio: ESC-02 · Landing pública · Transportistas</option>
+          <option value="T2" data-scenario="guest-carrier">T2 · Solicitar el alta · Inicio: ESC-02 · Landing pública · Transportistas</option>
+          <option value="T3" data-scenario="carrier-approved">T3 · Buscar y enviar una propuesta · Inicio: ESC-04 · Panel transportista aprobado</option>
+          <option value="T4" data-scenario="carrier-approved">T4 · Conservar una búsqueda · Inicio: ESC-04 · Panel transportista aprobado</option>
+          <option value="T5" data-scenario="carrier-approved">T5 · Revisar un trabajo conseguido · Inicio: ESC-04 · Panel transportista aprobado</option>
+          <option value="T6" data-scenario="carrier-approved">T6 · Hacer una pregunta sobre un anuncio · Inicio: ESC-04 · Panel transportista aprobado</option>
+          <option value="T7" data-scenario="carrier-approved">T7 · Consultar facturas y comisiones · Inicio: ESC-04 · Panel transportista aprobado</option>
+          <option value="T8" data-scenario="carrier-approved">T8 · Corregir la razón social · Inicio: ESC-04 · Panel transportista aprobado</option>
+          <option value="T9" data-scenario="carrier-approved">T9 · Enviar una propuesta con un rango · Inicio: ESC-04 · Panel transportista aprobado</option>
+        </optgroup>
+      </select>
       <button class="demo-reset" id="demo-reset" type="button">Reiniciar datos</button>
     </div>
   </aside>
@@ -140,6 +167,6 @@
 
   <div id="toast-region" class="toast-region" aria-live="polite" aria-atomic="true"></div>
   <div id="modal-root"></div>
-  <script src="app.js?v=25"></script>
+  <script src="app.js?v=28"></script>
 </body>
 </html>
