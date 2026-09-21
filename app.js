@@ -19,7 +19,7 @@
   };
 
   const seed = {
-    audience: 'client', requestedContext: 'client', pendingEmail: '', draftEmails: { client: '', carrier: '' }, scenario: 'guest-client', selectedMission: 'C1', scenarioPickerEnabled: true, session: null, route: 'home', selectedAd: 'A-104', accounts: { 'marta.ruiz@demo.es': { credential: passwordFingerprint(DEMO_PASSWORD) }, 'hola@caminosur.demo': { credential: passwordFingerprint(DEMO_PASSWORD) } },
+    audience: 'client', requestedContext: 'client', pendingEmail: '', draftEmails: { client: '', carrier: '' }, scenario: 'guest-client', selectedMission: 'C1', scenarioPickerEnabled: false, session: null, route: 'home', selectedAd: 'A-104', accounts: { 'marta.ruiz@demo.es': { credential: passwordFingerprint(DEMO_PASSWORD) }, 'hola@caminosur.demo': { credential: passwordFingerprint(DEMO_PASSWORD) } },
     clientProfile: { ownerId: 'C-1', publicId: 'CL-7K4P', name: 'Marta Ruiz', email: 'marta.ruiz@demo.es', phone: '612 345 780', bio: '' },
     savedSearches: [{ id: 'S-1', name: 'Madrid → Levante · Muebles', origin: 'Madrid', destination: 'Valencia', category: 'Muebles', searchStart: '', searchEnd: '' }],
     profile: { name: 'Rutas Camino Sur S.L.', documentNumber: 'B-12345678', billingStreet: 'Calle Industria', billingNumber: '24', billingPostalCode: '41007', billingCity: 'Sevilla', billingProvince: 'Sevilla', email: 'hola@caminosur.demo', phone: '954 480 210', bio: 'Transporte profesional de mobiliario y mercancía paletizada en la península.', vans: 2, employees: 5 },
