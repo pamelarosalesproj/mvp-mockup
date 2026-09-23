@@ -413,12 +413,17 @@ tbody tr:last-child td { border-bottom: 0; }
 .masked-card { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin: .7rem 0; padding: 1.1rem; border-radius: 12px; color: #fff; background: linear-gradient(135deg, var(--navy), var(--navy-2)); }
 .payment-method .button { margin-top: .65rem; }
 .membership-consent-card, .payment-registration { margin: 0 0 1.4rem; padding: 1.2rem; border: 1px solid var(--line); border-radius: 12px; background: var(--surface-soft); }
-.membership-consent-card { display: grid; grid-template-columns: 1.2fr .8fr; gap: 1rem 1.5rem; }
+.membership-consent-card { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(260px, .8fr); align-items: start; gap: 1rem 2rem; }
 .membership-consent-card h3 { margin: .2rem 0; }
 .membership-consent-card ul, .current-offer ul { list-style: none; padding: 0; margin: .75rem 0; }
 .membership-consent-card li, .current-offer li { margin: .35rem 0; color: #345f54; }
-.membership-consent-card .check-line { grid-column: 1 / -1; display: grid; grid-template-columns: auto 1fr; align-items: start; gap: .65rem; padding-top: 1rem; border-top: 1px solid var(--line); }
-.check-line input { width: auto; margin-top: .2rem; }
+.membership-benefits p { max-width: 450px; margin-bottom: 1.25rem; }
+.membership-benefits ul { margin-bottom: 0; }
+.membership-consent-card > .membership-price { margin: 1.35rem 0 0; }
+.membership-reminder { grid-column: 1 / -1; margin: .25rem 0 0; padding: .8rem 1rem; border-radius: 9px; color: #204b61; background: #e6f2f7; }
+.membership-consent-card .check-line { grid-column: 1 / -1; display: flex; align-items: flex-start; gap: .65rem; padding-top: 1rem; border-top: 1px solid var(--line); }
+.check-line input { width: auto; flex: 0 0 auto; margin: .2rem 0 0; }
+.check-line > span { display: inline; }
 .current-offer { max-width: 900px; margin: 0 auto 1rem; }
 .phone-preview { width: min(390px, 100%); margin: 1rem auto; padding: 12px; border: 7px solid var(--navy); border-radius: 34px; background: #fff; box-shadow: var(--shadow); }
 .phone-screen { min-height: 610px; padding: 1.2rem; border-radius: 21px; background: var(--surface-soft); }
