@@ -2,7 +2,7 @@ name: Publish GitHub Pages
 
 on:
   push:
-    branches: [main, feature/dual-profile-access]
+    branches: [main, feature/dual-profile-access, feature/mockup-prd-v6-membership]
   workflow_dispatch:
 
 permissions:
