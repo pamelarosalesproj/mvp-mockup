@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Prototipo navegable de MiEnvio.es para validar los flujos del marketplace de transporte.">
   <title>MiEnvio.es · Prototipo</title>
-  <link rel="stylesheet" href="styles.css?v=21">
+  <link rel="stylesheet" href="styles.css?v=27">
 </head>
 <body>
   <a class="skip-link" href="#app">Ir al contenido</a>
@@ -32,7 +32,7 @@
           <option value="client">ESC-03 · Solo perfil cliente · Panel</option>
         </optgroup>
         <optgroup label="F02-B · Revisar el alta de transportista">
-          <option value="admin">ESC-12 · Administración · Altas y comisiones</option>
+          <option value="admin">ESC-12 · Administración · Altas y membresía</option>
         </optgroup>
         <optgroup label="F02-C · Subsanar un alta transportista rechazada">
           <option value="guest-carrier">ESC-02 · Landing pública · Transportistas</option>
@@ -107,15 +107,17 @@
           <option value="carrier-approved">ESC-04 · Solo perfil transportista · Aprobado</option>
           <option value="dual-carrier">ESC-06 · Ambos perfiles · Vista transportista</option>
         </optgroup>
-        <optgroup label="F14 · Configurar comisiones por rango">
-          <option value="admin">ESC-12 · Administración · Altas y comisiones</option>
+        <optgroup label="F14 · Configurar oferta de membresía">
+          <option value="admin">ESC-12 · Administración · Oferta de membresía</option>
         </optgroup>
-        <optgroup label="F15 · Consultar facturas mensuales y sus comisiones">
-          <option value="carrier-approved">ESC-04 · Solo perfil transportista · Aprobado</option>
-          <option value="dual-carrier">ESC-06 · Ambos perfiles · Vista transportista</option>
-          <option value="carrier-incomplete">ESC-09 · Alta transportista · No enviada</option>
-          <option value="carrier-pending">ESC-10 · Alta transportista · En revisión</option>
-          <option value="carrier-rejected">ESC-11 · Alta transportista · Requiere correcciones</option>
+        <optgroup label="F15 · Gestionar membresía, pagos y facturas">
+          <option value="membership-prepared">ESC-10 · Membresía preparada · Alta en revisión</option>
+          <option value="membership-trial">ESC-13 · Membresía · Prueba gratuita</option>
+          <option value="membership-active">ESC-14 · Membresía · Activa</option>
+          <option value="membership-cancelled">ESC-15 · Membresía · Cancelación programada</option>
+          <option value="membership-payment-pending">ESC-16 · Membresía · Pago pendiente</option>
+          <option value="membership-finished">ESC-17 · Membresía · Finalizada</option>
+          <option value="membership-mobile">ESC-18 · Membresía · Resumen móvil</option>
         </optgroup>
       </select>
       <select id="demo-mission-scenario" aria-label="Misión y escenario de inicio" hidden>
@@ -136,7 +138,7 @@
           <option value="T4" data-scenario="carrier-approved">T4 · Conservar una búsqueda · Inicio: ESC-04 · Panel transportista aprobado</option>
           <option value="T5" data-scenario="carrier-approved">T5 · Revisar un trabajo conseguido · Inicio: ESC-04 · Panel transportista aprobado</option>
           <option value="T6" data-scenario="carrier-approved">T6 · Hacer una pregunta sobre un anuncio · Inicio: ESC-04 · Panel transportista aprobado</option>
-          <option value="T7" data-scenario="carrier-approved">T7 · Consultar facturas y comisiones · Inicio: ESC-04 · Panel transportista aprobado</option>
+          <option value="T7" data-scenario="membership-trial">T7 · Gestionar membresía y facturas · Inicio: ESC-13 · Prueba gratuita</option>
           <option value="T8" data-scenario="carrier-approved">T8 · Corregir la razón social · Inicio: ESC-04 · Panel transportista aprobado</option>
           <option value="T9" data-scenario="carrier-approved">T9 · Enviar una propuesta con un rango · Inicio: ESC-04 · Panel transportista aprobado</option>
         </optgroup>
@@ -167,6 +169,6 @@
 
   <div id="toast-region" class="toast-region" aria-live="polite" aria-atomic="true"></div>
   <div id="modal-root"></div>
-  <script src="app.js?v=30"></script>
+  <script src="app.js?v=38"></script>
 </body>
 </html>
