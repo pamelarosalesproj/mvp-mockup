@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400..700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=32">
+  <link rel="stylesheet" href="styles.css?v=42">
 </head>
 <body>
   <a class="skip-link" href="#app">Ir al contenido</a>
@@ -35,7 +35,7 @@
           <option value="client">ESC-03 · Solo perfil cliente · Panel</option>
         </optgroup>
         <optgroup label="F02-B · Revisar el alta de transportista">
-          <option value="admin">ESC-12 · Administración · Altas y membresía</option>
+          <option value="admin">ESC-12 · Administración · Altas de transportistas</option>
         </optgroup>
         <optgroup label="F02-C · Subsanar un alta transportista rechazada">
           <option value="guest-carrier">ESC-02 · Landing pública · Transportistas</option>
@@ -110,25 +110,13 @@
           <option value="carrier-approved">ESC-04 · Solo perfil transportista · Aprobado</option>
           <option value="dual-carrier">ESC-06 · Ambos perfiles · Vista transportista</option>
         </optgroup>
-        <optgroup label="F14 · Configurar oferta de membresía">
-          <option value="admin-membership">ESC-19 · Administración · Oferta de membresía</option>
-        </optgroup>
-        <optgroup label="F15 · Gestionar membresía, pagos y facturas">
-          <option value="membership-prepared">ESC-10 · Membresía preparada · Alta en revisión</option>
-          <option value="membership-trial">ESC-13 · Membresía · Prueba gratuita</option>
-          <option value="membership-active">ESC-14 · Membresía · Activa</option>
-          <option value="membership-cancelled">ESC-15 · Membresía · Cancelación programada</option>
-          <option value="membership-payment-pending">ESC-16 · Membresía · Pago pendiente</option>
-          <option value="membership-finished">ESC-17 · Membresía · Finalizada</option>
-          <option value="membership-mobile">ESC-18 · Membresía · Resumen móvil</option>
-        </optgroup>
       </select>
       <select id="demo-mission-scenario" aria-label="Misión y escenario de inicio" hidden>
         <optgroup label="Misiones como cliente">
           <option value="C1" data-scenario="guest-client">C1 · Crear tu perfil · Inicio: ESC-01 · Landing pública · Clientes</option>
           <option value="C2" data-scenario="client">C2 · Publicar una necesidad · Inicio: ESC-03 · Panel cliente</option>
           <option value="C3" data-scenario="client">C3 · Responder una pregunta · Inicio: ESC-03 · Panel cliente</option>
-          <option value="C4" data-scenario="client">C4 · Elegir una propuesta · Inicio: ESC-03 · Panel cliente</option>
+          <option value="C4" data-scenario="client">C4 · Elegir un presupuesto · Inicio: ESC-03 · Panel cliente</option>
           <option value="C5" data-scenario="client">C5 · Retirar un anuncio · Inicio: ESC-03 · Panel cliente</option>
           <option value="C6" data-scenario="client">C6 · Corregir el nombre de tu perfil · Inicio: ESC-03 · Panel cliente</option>
           <option value="C7" data-scenario="client">C7 · Revisar una mudanza con fotos · Inicio: ESC-03 · Panel cliente</option>
@@ -136,20 +124,17 @@
         </optgroup>
         <optgroup label="Misiones como transportista">
           <option value="T1" data-scenario="guest-carrier">T1 · Explorar oportunidades · Inicio: ESC-02 · Landing pública · Transportistas</option>
-          <option value="T2" data-scenario="guest-carrier">T2 · Solicitar el alta y preparar la membresía · Inicio: ESC-02 · Landing pública · Transportistas</option>
-          <option value="T3" data-scenario="carrier-approved">T3 · Buscar un anuncio y enviar una propuesta · Inicio: ESC-04 · Panel transportista aprobado</option>
+          <option value="T2" data-scenario="guest-carrier">T2 · Solicitar el alta profesional · Inicio: ESC-02 · Landing pública · Transportistas</option>
+          <option value="T3" data-scenario="carrier-approved">T3 · Buscar un anuncio y enviar un presupuesto · Inicio: ESC-04 · Panel transportista aprobado</option>
           <option value="T4" data-scenario="carrier-approved">T4 · Conservar una búsqueda · Inicio: ESC-04 · Panel transportista aprobado</option>
           <option value="T5" data-scenario="carrier-approved">T5 · Revisar un trabajo conseguido · Inicio: ESC-04 · Panel transportista aprobado</option>
           <option value="T6" data-scenario="carrier-approved">T6 · Preguntar sobre un anuncio · Inicio: ESC-04 · Panel transportista aprobado</option>
-          <option value="T7" data-scenario="membership-trial">T7 · Consultar y gestionar la membresía · Inicio: ESC-13 · Prueba gratuita</option>
           <option value="T8" data-scenario="carrier-approved">T8 · Corregir la razón social · Inicio: ESC-04 · Panel transportista aprobado</option>
-          <option value="T9" data-scenario="carrier-approved">T9 · Enviar una propuesta con un rango de fechas · Inicio: ESC-04 · Panel transportista aprobado</option>
-          <option value="T10" data-scenario="membership-active">T10 · Consultar las facturas de una membresía activa · Inicio: ESC-14 · Membresía activa</option>
+          <option value="T9" data-scenario="carrier-approved">T9 · Enviar un presupuesto con un rango de fechas · Inicio: ESC-04 · Panel transportista aprobado</option>
         </optgroup>
         <optgroup label="Misiones como administrador">
           <option value="A1" data-scenario="admin">A1 · Revisar y aprobar el alta de un transportista · Inicio: ESC-12 · Altas de transportistas</option>
           <option value="A2" data-scenario="admin">A2 · Rechazar un alta y solicitar subsanación · Inicio: ESC-12 · Altas de transportistas</option>
-          <option value="A3" data-scenario="admin-membership">A3 · Publicar una nueva versión de la oferta de membresía · Inicio: ESC-19 · Oferta de membresía</option>
         </optgroup>
       </select>
       <button class="demo-reset" id="demo-reset" type="button">Limpiar</button>
@@ -169,7 +154,7 @@
       <nav class="main-nav" aria-label="Navegación principal" id="main-nav"></nav>
       <button class="menu-toggle" id="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav">Menú</button>
       <div class="header-actions" id="header-actions">
-        <button class="button button-ghost" type="button" data-action="login">Entrar o registrarse</button>
+        <button class="button button-primary header-login" type="button" data-action="login">Entrar / Registrarse</button>
       </div>
     </div>
   </header>
@@ -178,6 +163,6 @@
 
   <div id="toast-region" class="toast-region" aria-live="polite" aria-atomic="true"></div>
   <div id="modal-root"></div>
-  <script src="app.js?v=40"></script>
+  <script src="app.js?v=57"></script>
 </body>
 </html>

@@ -1,12 +1,12 @@
 # MiEnvio.es · prototipo navegable
 
-Este directorio contiene un mockup interactivo y autocontenido para validar pantallas, permisos y cambios de estado. Todos los datos son ficticios. No hay backend, autenticación real, envío de correos, pagos, subida de documentos ni conexiones externas.
+Este directorio contiene un mockup interactivo y autocontenido para validar pantallas, permisos y cambios de estado. Todos los datos son ficticios. No hay backend, autenticación real, envío de correos, pagos, subida de documentos ni conexiones externas. Esta versión omite la monetización: el alta profesional aprobada habilita preguntas y presupuestos, sin membresía ni comisiones.
 
 ## Cómo abrirlo
 
 Abre `index.html` directamente en un navegador moderno. También puedes servir esta carpeta con cualquier servidor estático si tu navegador limita el almacenamiento local para archivos `file://`.
 
-El selector gris **Mockup**, separado de la cabecera de MiEnvio.es, cambia de actor y carga situaciones representativas. **Limpiar** restaura anuncios, propuestas, altas y membresías al estado inicial. Los cambios se conservan en `localStorage` del navegador hasta reiniciarlos.
+El selector gris **Mockup**, separado de la cabecera de MiEnvio.es, cambia de actor y carga situaciones representativas. **Limpiar** restaura anuncios, presupuestos y altas al estado inicial. Los cambios se conservan en `localStorage` del navegador hasta reiniciarlos.
 
 ## Desarrollo y publicación
 

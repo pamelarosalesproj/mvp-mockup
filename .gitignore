@@ -1,6 +1,7 @@
 # Generated static output
 /dist/
 /_site/
+/dashboard/
 
 # Local hosting and editor configuration
 /.openai/
